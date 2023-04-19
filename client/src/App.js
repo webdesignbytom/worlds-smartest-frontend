@@ -1,20 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
 // Analytics
 import ReactGA from 'react-ga';
+import HomePage from './pages/home/HomePage';
 
 function App() {
+
   ReactGA.initialize('G-2DWCKVD9WK');
   ReactGA.pageview('/');
-  ReactGA.pageview('/contact');
-  ReactGA.pageview('/design');
-  ReactGA.pageview('/portfolio');
-  ReactGA.pageview('/login');
-  ReactGA.pageview('/store');
-  ReactGA.pageview('/new-project');
+
   return (
-    <>Hello</>
-    // <Routes>
-    //   <Route path='/' index element={<IndexPage />} />
+    <Routes>
+      <Route path='/' index element={<HomePage />} />
+    </Routes>
     //   <Route path='/contact' element={<Contact />} />
 
     //   {/* Secure routes */}
