@@ -2,8 +2,8 @@
 
 Quiz app. React front end
 
-You can see a live version of the site here [Worlds Smartest](https://www.worlds-smartest.com) <br/>
-Backend is a python application that can be viewed here [Backend](https://github.com/webdesignsbytom/worlds-smartest-backend)
+You can see a live version of the site here [Worlds Smartest Live Version](https://www.worlds-smartest.com) <br/>
+Backend is a python application that can be viewed here [Worlds Smartest Backend Repo](https://github.com/webdesignsbytom/worlds-smartest-backend)
 
 ## Table of contents
 
