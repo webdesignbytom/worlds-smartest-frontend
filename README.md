@@ -21,9 +21,9 @@ Scores can be adjusted by user votes.
 
 ## Technologies
 
-App developed with:
-Frontend: React, JavaScript, Tailwind, Axios, validator, bootstrap
-
+App developed with: <br/>
+Frontend: React, JavaScript, Tailwind, Axios, validator, bootstrap <br/>
+Backend: Python, Django, postgreSQL
 ## Run this project locally
 
 1. Fork this repository and clone the fork to your machine.
