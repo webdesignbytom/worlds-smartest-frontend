@@ -1,7 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 // Analytics
 import ReactGA from 'react-ga';
+// Pages
 import HomePage from './pages/home/HomePage';
+import RegisterPage from './users/register/RegisterPage';
+import AboutPage from './pages/about/AboutPage';
 
 function App() {
 
@@ -11,6 +14,8 @@ function App() {
   return (
     <Routes>
       <Route path='/' index element={<HomePage />} />
+      <Route path='/sign-up' index element={<RegisterPage />} />
+      <Route path='/quiz-information' index element={<AboutPage />} />
     </Routes>
     //   <Route path='/contact' element={<Contact />} />
 
