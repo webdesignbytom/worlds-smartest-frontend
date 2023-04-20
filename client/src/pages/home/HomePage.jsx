@@ -7,14 +7,15 @@ import BetaModal from '../../components/home/BetaModal';
 
 function HomePage() {
   return (
-    <div className='bg-black grid h-screen lg:max-h-screen lg:overflow-hidden text-gray-100'>
+    <div className='bg-gray-50 dark:bg-black grid h-screen lg:max-h-screen lg:overflow-hidden dark:text-gray-100'>
       <main className='relative grid grid-rows-rev h-full'>
         {/* Question mark */}
         <QuestionModal />
         {/* Beta test */}
         <BetaModal />
+
         {/* Text and CTA */}
-        <section className='grid grid-rows-rev h-full'>
+        <section className='grid mt-4 grid-rows-rev h-full'>
           <section className='mb-4 grid h-full items-center'>
             <section>
               <article className='text-center'>
@@ -35,7 +36,7 @@ function HomePage() {
                 </p>
                 <p>
                   Prizes for the new
-                  <span className='font-semibold text-gray-200 italic'>
+                  <span className='font-semibold text-gray-800 italic'>
                     {' '}
                     Worlds Smartest Person{' '}
                   </span>
@@ -54,7 +55,7 @@ function HomePage() {
                 Reserve your spot to take part now!
               </h4>
               <Link className='' to='/sign-up'>
-                <button className='w-full rounded-lg p-2 my-2 text-2xl outline outline-2 outline-gray-100 hover:bg-blue-400 bg-blue-500 hover:outline-gray-200'>
+                <button className='w-full rounded-lg p-2 my-2 text-2xl outline outline-2 text-white font-bold outline-black hover:bg-blue-400 bg-blue-500 hover:outline-gray-800'>
                   Sign Up Now!
                 </button>
               </Link>
@@ -71,7 +72,7 @@ function HomePage() {
         </section>
 
         {/* Boxes */}
-        <section className='grid h-fit my-4 mx-6 lg:mx-10 lg:mb-10'>
+        <section className='grid h-fit my-4 mx-6 lg:mx-10 lg:mb-14'>
           <section className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4'>
             <PromoBoxes />
           </section>

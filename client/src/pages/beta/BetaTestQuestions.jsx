@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 function BetaTestQuestions() {
   return (
-    <div>BetaTestQuestions</div>
-  )
+    <div className='bg-red-300 min-h-screen h-screen lg:overflow-hidden grid '>
+      BetaTestQuestions
+    </div>
+  );
 }
 
-export default BetaTestQuestions
+export default BetaTestQuestions;
