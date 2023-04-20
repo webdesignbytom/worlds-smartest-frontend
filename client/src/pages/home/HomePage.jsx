@@ -2,26 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // Components
 import PromoBoxes from '../../components/home/PromoBoxes';
-// Icons
-import { FaQuestionCircle } from 'react-icons/fa';
+import QuestionModal from '../../components/home/QuestionModal';
+
 
 function HomePage() {
   return (
     <div className='bg-black grid h-screen lg:max-h-screen lg:overflow-hidden text-gray-100'>
       <main className='relative grid grid-rows-rev bg-yellow-400 h-full'>
         {/* Question mark */}
-        <section className='absolute grid right-4 top-4 group'>
-          <div className='flex justify-end'>
-            <FaQuestionCircle size={40} className='cursor-pointer' />
-          </div>
-          <article className='invisible bg-red-400 p-2 group-hover:visible outline outline-2 outline-black max-w-[300px]'>
-            <p class=''>
-              Since the loss of Sir Stephen Hawking, we ask ourselves. Who is the worlds smartest Person? Intelligence, testing methods, social opinion and data science have lead vastly forwards in the time since his life and death. Here on www.worlds-smartest.com anyone may enter the gauntlet and fight using whit, cunning, skill and achievement to become the uncontested heavy weight intelligence of the world!
-            </p>
-          </article>
-        </section>
+        <QuestionModal />
         {/* Text and CTA */}
-        <section className='grid bg-red-300 p-2 h-full'>
+        <section className='grid grid-rows-rev bg-red-300 h-full'>
           <section className='mb-4 bg-green-300 grid h-full'>
             <article className='text-center'>
               <h1 className='text-5xl mb-2 font-bold'>Worlds Smartest</h1>
@@ -48,7 +39,7 @@ function HomePage() {
             </article>
           </section>
           {/* CTA */}
-          <section className='bg-blue-300 grid justify-center'>
+          <section className='bg-blue-300 grid justify-center h-fit'>
             <article className='leading-5 w-fit'>
               <h4 className='text-2xl text-center'>
                 Reserve your spot to take part now
@@ -62,16 +53,16 @@ function HomePage() {
                 Have <span className='italic'>your</span> say on the results
                 without taking part by{' '}
                 <Link to='sign-up'>
-                  <span className='italic'>signing up</span>
+                  <span className='italic'>signing up </span>
                 </Link>
-                !
+                for free!
               </h5>
             </article>
           </section>
         </section>
 
         {/* Boxes */}
-        <section className='grid h-fit bg-red-200 my-4 mx-6 lg:mx-10 lg:mb-10'>
+        <section className='grid h-fit my-4 mx-6 lg:mx-10 lg:mb-10'>
           <section className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4'>
             <PromoBoxes />
           </section>
