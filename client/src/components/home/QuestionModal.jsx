@@ -11,7 +11,7 @@ function QuestionModal() {
         </span>
         <FaQuestionCircle size={40} className='cursor-pointer' />
       </div>
-      <article className='hidden bg-red-400 p-2 group-hover:block outline outline-2 outline-black max-w-[300px]'>
+      <article className='hidden m-2 bg-blue-500 p-2 group-hover:block outline outline-2 outline-white rounded-lg max-w-[300px]'>
         <p class=''>
           Since the loss of Sir Stephen Hawking, we ask ourselves. Who is the
           worlds smartest Person? Intelligence, testing methods, social opinion

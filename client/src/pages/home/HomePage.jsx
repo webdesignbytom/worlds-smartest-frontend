@@ -3,49 +3,58 @@ import { Link } from 'react-router-dom';
 // Components
 import PromoBoxes from '../../components/home/PromoBoxes';
 import QuestionModal from '../../components/home/QuestionModal';
-
+import BetaModal from '../../components/home/BetaModal';
 
 function HomePage() {
   return (
     <div className='bg-black grid h-screen lg:max-h-screen lg:overflow-hidden text-gray-100'>
-      <main className='relative grid grid-rows-rev bg-yellow-400 h-full'>
+      <main className='relative grid grid-rows-rev h-full'>
         {/* Question mark */}
         <QuestionModal />
+        {/* Beta test */}
+        <BetaModal />
         {/* Text and CTA */}
-        <section className='grid grid-rows-rev bg-red-300 h-full'>
-          <section className='mb-4 bg-green-300 grid h-full'>
-            <article className='text-center'>
-              <h1 className='text-5xl mb-2 font-bold'>Worlds Smartest</h1>
-              <h2 className='text-3xl font-semibold'>
-                The world's formost intelligence test
-              </h2>
-              <h3 className='text-2xl text-center mb-2'>
-                Starting 1st October 2023 until July 31st 2024
-              </h3>
-            </article>
-            <article className='text-center'>
-              <p>
-                The only intelligence test to allow the users to decide what
-                counts as true intelligence!
-              </p>
-              <p>
-                Prizes for the new
-                <span className='font-semibold text-gray-200'>
-                  Worlds Smartest Person
-                </span>
-                and runner up and regional categories
-              </p>
-              <p>Not your average IQ test!</p>
-            </article>
+        <section className='grid grid-rows-rev h-full'>
+          <section className='mb-4 grid h-full items-center'>
+            <section>
+              <article className='text-center'>
+                <h1 className='text-5xl mb-2 font-bold'>Worlds Smartest</h1>
+                <h2 className='text-3xl font-semibold'>
+                  The world's formost intelligence test
+                </h2>
+                <h3 className='text-2xl text-center my-4'>
+                  Starting{' '}
+                  <span className='font-semibold'>1st October 2023</span> until{' '}
+                  <span className='font-semibold'>July 31st 2024</span>
+                </h3>
+              </article>
+              <article className='text-center'>
+                <p>
+                  The only intelligence test to allow the users to decide what
+                  counts as true intelligence!
+                </p>
+                <p>
+                  Prizes for the new
+                  <span className='font-semibold text-gray-200 italic'>
+                    {' '}
+                    Worlds Smartest Person{' '}
+                  </span>
+                  and runner up and regional categories
+                </p>
+                <p>
+                  Not your average <span className='font-bold'>IQ</span> test!
+                </p>
+              </article>
+            </section>
           </section>
           {/* CTA */}
-          <section className='bg-blue-300 grid justify-center h-fit'>
+          <section className='grid justify-center h-fit mb-4'>
             <article className='leading-5 w-fit'>
               <h4 className='text-2xl text-center'>
-                Reserve your spot to take part now
+                Reserve your spot to take part now!
               </h4>
               <Link className='' to='/sign-up'>
-                <button className='bg-blue-500 w-full rounded-lg p-2 my-2 text-2xl outline outline-2 outline-gray-100 hover:bg-blue-400 hover:outline-gray-200'>
+                <button className='w-full rounded-lg p-2 my-2 text-2xl outline outline-2 outline-gray-100 hover:bg-blue-400 bg-blue-500 hover:outline-gray-200'>
                   Sign Up Now!
                 </button>
               </Link>
@@ -53,7 +62,7 @@ function HomePage() {
                 Have <span className='italic'>your</span> say on the results
                 without taking part by{' '}
                 <Link to='sign-up'>
-                  <span className='italic'>signing up </span>
+                  <span className='italic text-blue-500'>signing up </span>
                 </Link>
                 for free!
               </h5>

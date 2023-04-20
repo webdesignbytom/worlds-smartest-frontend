@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import HomePage from './pages/home/HomePage';
 import RegisterPage from './users/register/RegisterPage';
 import AboutPage from './pages/about/AboutPage';
+import BetaTestQuestions from './pages/beta/BetaTestQuestions';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Route path='/' index element={<HomePage />} />
       <Route path='/sign-up' index element={<RegisterPage />} />
       <Route path='/quiz-information' index element={<AboutPage />} />
+      <Route path='/beta-test-questions' index element={<BetaTestQuestions />} />
     </Routes>
     //   <Route path='/contact' element={<Contact />} />
 
