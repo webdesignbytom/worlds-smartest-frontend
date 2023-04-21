@@ -23,34 +23,38 @@ model Course {
 }
 
 model Semester {
-  id         Int           @id @default(autoincrement())
-  title      String // Spring, Autumn, Winter
-  courseId   Int
-  course     Course        @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  totalScore Int           @default(2000)
-  numExams   Int           @default(0)
-  exams      Exam[]
-  metaData   SemesterMeta?
-  startDate  DateTime?
-  endDate    DateTime?
-  createdAt  DateTime      @default(now())
-  updatedAt  DateTime?     @updatedAt
+  id                Int                @id @default(autoincrement())
+  title             String // Spring, Autumn, Winter
+  courseId          Int
+  course            Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  totalScore        Int                @default(2000)
+  numExams          Int                @default(0)
+  exams             Exam[]
+  metaData          SemesterMeta?
+  semesterTakeTable SemesterTakeTable?
+  startDate         DateTime?
+  endDate           DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime?          @updatedAt
 }
 
 model SemesterMeta {
   id         Int       @id @default(autoincrement())
   content    String    @default("") // Meta data for semester
   semesterId Int       @unique
-  semester   Semester  @relation(fields: [semesterId], references: [id])
+  semester   Semester  @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   createdAt  DateTime  @default(now())
   updatedAt  DateTime? @updatedAt
 }
 
 model SemesterTakeTable {
   id           Int       @id @default(autoincrement())
+  courseTitle  String
   numNewUsers  Int       @default(0) // Users to join during semester
   numCompleted Int       @default(0) // User to finish all questions in semester
   content      String    @default("")
+  semesterId   Int       @unique
+  semester     Semester  @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime? @updatedAt
 }
@@ -121,12 +125,14 @@ model ExamTakeTable {
   examId     Int
   exam       Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
   userId     String
-  user       User      @relation(fields: [userId], references: [id])
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   startAt    DateTime
   finishedAt DateTime?
   content    String? // The column used to store the take remarks.
   createdAt  DateTime  @default(now())
   updatedAt  DateTime? @updatedAt
+
+  @@unique([userId, examId])
 }
 
 // Bug report for quiz
