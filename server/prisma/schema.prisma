@@ -58,23 +58,24 @@ model SemesterTakeTable {
 // Exams 
 // Will be 344 exams ending on same data
 model Exam {
-  id         Int             @id @default(autoincrement())
-  title      String          @default("") @db.VarChar(35)
-  metaTitle  String          @default("") @db.VarChar(150) // SEO
-  slug       String          @default("") @db.VarChar(100) // Form URL
-  summary    String          @default("") @db.VarChar(250)
-  type       Int             @default(0)
-  score      Int             @default(0) // Total score available
-  metaData   ExamMeta?
-  questions  ExamQuestion[] // Questions
-  takeTable  ExamTakeTable[]
-  bugReports BugReport[]
-  semesterId Int
-  semester   Semester        @relation(fields: [semesterId], references: [id])
-  startDate  DateTime?
-  endDate    DateTime?
-  createdAt  DateTime        @default(now())
-  updatedAt  DateTime?       @updatedAt
+  id            Int             @id @default(autoincrement())
+  title         String          @default("") @db.VarChar(35)
+  metaTitle     String          @default("") @db.VarChar(150) // SEO
+  slug          String          @default("") @db.VarChar(100) // Form URL
+  summary       String          @default("") @db.VarChar(250)
+  type          Int             @default(0)
+  score         Int             @default(0) // Total score available
+  metaData      ExamMeta?
+  questions     ExamQuestion[] // Questions
+  takeTable     ExamTakeTable[]
+  bugReports    BugReport[]
+  semesterTitle String
+  semesterId    Int
+  semester      Semester        @relation(fields: [semesterId], references: [id])
+  startDate     DateTime?
+  endDate       DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime?       @updatedAt
 }
 
 model ExamMeta {
@@ -93,9 +94,9 @@ model ExamQuestion {
   category  String
   active    Boolean      @default(true)
   score     Int          @default(1)
-  question   String       @default("") @db.VarChar(5000)
+  question  String       @default("") @db.VarChar(5000)
   answers   ExamAnswer[]
-  examId    Int          
+  examId    Int
   exam      Exam         @relation(fields: [examId], references: [id], onDelete: Cascade)
   createdAt DateTime     @default(now())
   updatedAt DateTime?    @updatedAt
@@ -117,9 +118,9 @@ model ExamTakeTable {
   id         Int       @id @default(autoincrement())
   status     String // The status of the take. It can be enrolled, started, paused, finished, declared.
   score      Int // Score 	The total score obtained by the user.
-  examId     Int       
+  examId     Int
   exam       Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
-  userId     String    
+  userId     String
   user       User      @relation(fields: [userId], references: [id])
   startAt    DateTime
   finishedAt DateTime?

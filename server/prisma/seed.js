@@ -68,6 +68,7 @@ async function seed() {
         'The first ever test has finally started. We have kept it simple to check nothing breaks and to ease you in. 50 random questions have been selected for you today.',
       score: 50,
       semesterId: yearOneSemester.id,
+      semesterTitle: yearOneSemester.title
     },
   });
 
@@ -89,8 +90,8 @@ async function seed() {
         question: 'What sport did Cassius Clay play?',
         examId: examOne.id
       },
-    
   });
+
   const questionsOneAnswers = await dbClient.examAnswer.createMany({
     data: [
       {
