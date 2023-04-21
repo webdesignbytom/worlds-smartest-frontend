@@ -8,27 +8,74 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-// QUIZ 
-// Will be 344 quizzes ending on same data
+model Course {
+  id           Int        @id @default(autoincrement())
+  title        String
+  description  String
+  semesters    Semester[]
+  numSemesters Int        @default(3)
+  totalScore   Int        @default(6000) // Total score achievable for everything over the year
+  numUsers     Int        @default(0) // Total number of active players
+  startDate    DateTime?
+  endDate      DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime?  @updatedAt
+}
+
+model Semester {
+  id         Int           @id @default(autoincrement())
+  title      String // Spring, Autumn, Winter
+  courseId   Int
+  course     Course        @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  totalScore Int           @default(2000)
+  numExams   Int           @default(0)
+  exams      Exam[]
+  metaData   SemesterMeta?
+  startDate  DateTime?
+  endDate    DateTime?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime?     @updatedAt
+}
+
+model SemesterMeta {
+  id         Int       @id @default(autoincrement())
+  content    String    @default("") // Meta data for semester
+  semesterId Int       @unique
+  semester   Semester  @relation(fields: [semesterId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
+}
+
+model SemesterTakeTable {
+  id           Int       @id @default(autoincrement())
+  numNewUsers  Int       @default(0) // Users to join during semester
+  numCompleted Int       @default(0) // User to finish all questions in semester
+  content      String    @default("")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+}
+
+// Exams 
+// Will be 344 exams ending on same data
 model Exam {
-  id          Int            @id @default(autoincrement())
-  title       String         @default("") @db.VarChar(35)
-  metaTitle   String         @default("") @db.VarChar(100) // SEO
-  slug        String         @default("") @db.VarChar(100) // Form URL
-  summary     String         @default("") @db.VarChar(250)
-  type        Int            @default(0)
-  score       Int            @default(0) // Total score available
-  metaData    ExamMeta?
-  questions   ExamQuestion[] // Questions
-  answers     ExamAnswer[] // Questions
-  takeTable   TakeTable[] // Questions
-  bugReports  BugReport[]
-  userId      String         @unique
-  user        User           @relation(fields: [userId], references: [id])
-  createdAt   DateTime       @default(now())
-  publishedAt DateTime?
-  endDate     DateTime?
-  updatedAt   DateTime?      @updatedAt
+  id            Int             @id @default(autoincrement())
+  title         String          @default("") @db.VarChar(35)
+  metaTitle     String          @default("") @db.VarChar(150) // SEO
+  slug          String          @default("") @db.VarChar(100) // Form URL
+  summary       String          @default("") @db.VarChar(250)
+  type          Int             @default(0)
+  score         Int             @default(0) // Total score available
+  metaData      ExamMeta?
+  questions     ExamQuestion[] // Questions
+  takeTable     ExamTakeTable[]
+  bugReports    BugReport[]
+  semesterTitle String
+  semesterId    Int
+  semester      Semester        @relation(fields: [semesterId], references: [id])
+  startDate     DateTime?
+  endDate       DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime?       @updatedAt
 }
 
 model ExamMeta {
@@ -42,37 +89,39 @@ model ExamMeta {
 }
 
 model ExamQuestion {
-  id        Int       @id @default(autoincrement())
-  type      String    @default("") @db.VarChar(30)
-  active    Boolean   @default(true)
-  score     Int       @default(1)
-  content   String    @default("") @db.VarChar(5000)
-  examId    Int       @unique
-  exam      Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+  id        Int          @id @default(autoincrement())
+  type      String       @default("") @db.VarChar(30)
+  category  String
+  active    Boolean      @default(true)
+  score     Int          @default(1)
+  question  String       @default("") @db.VarChar(5000)
+  answers   ExamAnswer[]
+  examId    Int
+  exam      Exam         @relation(fields: [examId], references: [id], onDelete: Cascade)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime?    @updatedAt
 }
 
 model ExamAnswer {
-  id         Int       @id @default(autoincrement())
+  id         Int          @id @default(autoincrement())
+  active     Boolean      @default(true) // Is the question visible to users
+  correct    Boolean      @default(false) // Did they answer correctly
+  content    String // One or multiple answers
   questionId Int
-  active     Boolean   @default(true) // Is the question visible to users
-  correct    Boolean   @default(true) // Did they answer correctly
-  content    String[] // One or multiple answers
-  examId     Int       @unique
-  exam       Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime? @updatedAt
+  question   ExamQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime?    @updatedAt
 }
 
 // Speed and accuracy data of quiz
-model TakeTable {
+model ExamTakeTable {
   id         Int       @id @default(autoincrement())
-  userId     String
   status     String // The status of the take. It can be enrolled, started, paused, finished, declared.
   score      Int // Score 	The total score obtained by the user.
-  examId     Int       @unique
+  examId     Int
   exam       Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
   startAt    DateTime
   finishedAt DateTime?
   content    String? // The column used to store the take remarks.
@@ -87,6 +136,7 @@ model BugReport {
   questionId Int?
   content    String   @default("") @db.VarChar(1000)
   screenshot String?
+  solution   String?
   viewed     Boolean  @default(false) // Is the question visible to users
   fixed      Boolean  @default(false) // Is the question visible to users
   examId     Int      @unique
@@ -109,7 +159,7 @@ model User {
   profile        Profile?
   // comments       Comment[]
   // likes          Like[]
-  exams          Exam[]
+  examResults    ExamTakeTable[]
   notifications  Notification[]
   badges         Badge[]
   puchaseHistory PuchaseHistory[]

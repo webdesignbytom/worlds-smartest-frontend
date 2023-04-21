@@ -29,6 +29,91 @@ async function seed() {
     },
   });
 
+  // Course
+  const firstCourse = await dbClient.course.create({
+    data: {
+      title: 'Worlds Smartest Person 2023-2024',
+      description:
+        'The first year the greatest intelligence exam is taking place.',
+    },
+  });
+
+  const yearOneSemester = await dbClient.semester.create({
+    data: {
+      title: 'Autumn',
+      courseId: firstCourse.id,
+    },
+  });
+
+  const yearOneSemesters = await dbClient.semester.createMany({
+    data: [
+      {
+        title: 'Winter',
+        courseId: firstCourse.id,
+      },
+      {
+        title: 'Spring',
+        courseId: firstCourse.id,
+      },
+    ],
+  });
+
+  const examOne = await dbClient.exam.create({
+    data: {
+      title: 'Exam One - A New Era',
+      metaTitle:
+        'Exam One - A New Era. www.worlds-smartest.com first ever course, semester and day. Welcome to the worlds smartest person test.',
+      slug: 'exam-one-autumn-semester',
+      summary:
+        'The first ever test has finally started. We have kept it simple to check nothing breaks and to ease you in. 50 random questions have been selected for you today.',
+      score: 50,
+      semesterId: yearOneSemester.id,
+      semesterTitle: yearOneSemester.title
+    },
+  });
+
+  const questionOneExamOne = await dbClient.examQuestion.create({
+    data: 
+      {
+        type: 'General Knowledge',
+        category: 'Space',
+        question: 'What is the closest planet to the Sun?',
+        examId: examOne.id
+      },
+  });
+
+  const questionTwoExamOne = await dbClient.examQuestion.create({
+    data: 
+      {
+        type: 'General Knowledge',
+        category: 'Sport',
+        question: 'What sport did Cassius Clay play?',
+        examId: examOne.id
+      },
+  });
+
+  const questionsOneAnswers = await dbClient.examAnswer.createMany({
+    data: [
+      {
+        questionId: questionOneExamOne.id,
+        content: 'Mercury',
+        correct: true,
+      },
+      {
+        questionId: questionOneExamOne.id,
+        content: 'Egypt',
+      },
+      {
+        questionId: questionOneExamOne.id,
+        content: 'Saturn',
+      },
+      {
+        questionId: questionOneExamOne.id,
+        content: 'Jupiter',
+      }
+    ],
+  });
+
   // EVENTS
   const eventOne = await dbClient.event.create({
     data: {
