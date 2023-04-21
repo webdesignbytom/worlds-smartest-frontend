@@ -5,6 +5,9 @@ import MonitorDisplay from '../../components/examDisplay/MonitorDisplay';
 
 function BetaTestQuestions() {
   const [questionsList, setQuestionsList] = useState([]);
+  const [currentQuestionNum, setCurrentQuestionNum] = useState(0);
+  const [totalQuestionsNum, setTotalQuestionsNum] = useState(0);
+  const [currentExamNum, setCurrentExamNum] = useState(0);
 
   const loadNextQuestion = () => {
     console.log('loading next question');
@@ -17,6 +20,11 @@ function BetaTestQuestions() {
   const answerQuestion = () => {
     console.log('answer');
   };
+
+  const startExam = () => {
+    console.log('Starting exam');
+    // Start clock
+  }
 
   return (
     <div className='relative grid test__bg min-h-screen h-screen lg:overflow-hidden w-full p-2'>
@@ -37,10 +45,10 @@ function BetaTestQuestions() {
                   Worlds Smartest Person
                 </h1>
               </article>
-              <article className='flex justify-between items-centerd mt-10 p-2 bg-red-300 outline outline-2 outline-black rounded'>
-                <h2>Exam 1</h2>
+              <article className='flex justify-evenly items-centerd mt-10 p-2 bg-red-300 outline outline-2 outline-black rounded'>
+                <h2>Exam {currentExamNum}</h2>
                 <span className='font-semibold text-xl'>00:00</span>
-                <h3>05/50</h3>
+                <h3>{currentQuestionNum}/{totalQuestionsNum}</h3>
               </article>
             </section>
             <section className='grid w-full items-center px-4 py-6'>
