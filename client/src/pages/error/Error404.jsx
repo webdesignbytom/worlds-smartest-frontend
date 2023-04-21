@@ -1,6 +1,5 @@
 import React from 'react';
 // Components
-import Navbar from '../../components/nav/Navbar';
 // Images
 import Cat from '../../assets/images/404cat.png';
 
@@ -8,7 +7,6 @@ function Error404() {
   return (
     <>
       <div className='h-screen overflow-hidden font-pops'>
-        <Navbar />
         <main className='relative h-full w-full'>
           <section className='grid absolute w-full text-center h-full items-center justify-center z-10'>
             <section className='grid gap-2'>
