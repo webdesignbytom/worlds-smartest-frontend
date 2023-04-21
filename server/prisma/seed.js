@@ -29,6 +29,32 @@ async function seed() {
     },
   });
 
+  // Course
+  const firstCourse = await dbClient.course.create({
+    data: {
+      title: 'Worlds Smartest Person 2023-2024',
+      description:
+        'The first year the greatest intelligence exam is taking place.',
+    },
+  });
+
+  const yearOneSemesters = await dbClient.semester.createMany({
+    data: [
+      {
+        title: 'Autumn',
+        courseId: firstCourse.id,
+      },
+      {
+        title: 'Winter',
+        courseId: firstCourse.id,
+      },
+      {
+        title: 'Spring',
+        courseId: firstCourse.id,
+      },
+    ],
+  });
+
   // EVENTS
   const eventOne = await dbClient.event.create({
     data: {

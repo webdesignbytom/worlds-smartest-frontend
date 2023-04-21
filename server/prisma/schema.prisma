@@ -8,6 +8,29 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+model Course {
+  id           Int        @id @default(autoincrement())
+  title        String
+  description  String
+  semesters    Semester[]
+  numSemesters Int        @default(3)
+  startDate    DateTime?
+  endDate      DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime?  @updatedAt
+}
+
+model Semester {
+  id        Int       @id @default(autoincrement())
+  title     String
+  courseId  Int       
+  course    Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  startDate DateTime?
+  endDate   DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
 // QUIZ 
 // Will be 344 quizzes ending on same data
 model Exam {
