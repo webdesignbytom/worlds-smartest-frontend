@@ -1,4 +1,4 @@
-# worlds-smartest-frontend
+# Worlds Smartest Frontend
 
 Quiz app. React front end
 
@@ -7,7 +7,7 @@ Backend is a python application that can be viewed here [Worlds Smartest Backend
 
 ## Table of contents
 
-- [worlds-smartest-frontend](#worlds-smartest-frontend)
+- [Worlds Smartest Frontend](#worlds-smartest-frontend)
   - [Table of contents](#table-of-contents)
   - [General info](#general-info)
   - [Technologies](#technologies)

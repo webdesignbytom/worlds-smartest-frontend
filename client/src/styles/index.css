@@ -77,9 +77,6 @@ select {
   -ms-user-select: none;
   user-select: none;
 }
-.triangular__shape {
-  clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-}
 
 /* Media Queries (MEDIUM DEVICES) */
 
