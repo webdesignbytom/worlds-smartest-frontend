@@ -46,6 +46,7 @@ module.exports = {
         'ls': '1fr 0.4fr',
         'a1a': 'auto 1fr auto',
         'aa': 'auto auto',
+        'aaa': 'auto auto auto',
         '3x': '3fr 1fr',
         'item': '50px 1fr',
         'ten-one': '10fr 1fr',

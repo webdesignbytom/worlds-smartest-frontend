@@ -2,14 +2,10 @@ import React from 'react';
 // Icons
 import { AiFillBug } from 'react-icons/ai';
 
-function BugReport() {
-
-    const writeBugReport = () => {
-        console.log('bug')
-    }
+function BugReport({ writeBugReport }) {
 
   return (
-    <section onClick={writeBugReport} className='absolute no__highlights grid right-4 top-4 cursor-pointer'>
+    <section onClick={writeBugReport} className='absolute no__highlights grid right-5 top-5 cursor-pointer'>
       <article className='flex justify-end items-center bg-gray-200 rounded-xl'>
         <span className='mx-2'>
           <p>BUG REPORT</p>
