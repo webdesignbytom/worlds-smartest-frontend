@@ -19,6 +19,7 @@ A quiz app that acts like a game and a serious IQ test.
 Contests to see who is the smartest person
 Scores can be adjusted by user votes.
 
+Running temporary beta version test server on Express in this file.
 ## Technologies
 
 App developed with: <br/>
