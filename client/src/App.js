@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 // Analytics
 import ReactGA from 'react-ga';
 // Pages
@@ -14,6 +15,12 @@ function App() {
   ReactGA.initialize('G-2DWCKVD9WK');
   ReactGA.pageview('/');
 
+  useEffect(() => {
+    console.log('doc', document.location) // urls of page
+    console.log('cookie', document.cookie)
+    console.log('nav', navigator.userAgent) // browser
+    console.log('nav', navigator.language) // language
+  }, [])
   return (
     <Routes>
       <Route path='/' index element={<HomePage />} />

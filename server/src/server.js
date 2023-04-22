@@ -7,9 +7,11 @@ import { join } from 'path';
 import * as url from 'url';
 // Import routers
 import authRouter from './routes/auth.js';
+import courseRouter from './routes/courses.js';
 import contactRouter from './routes/contacts.js';
 import complaintRouter from './routes/complaints.js';
 import eventRouter from './routes/events.js';
+import examRouter from './routes/exams.js';
 import notificationRouter from './routes/notifications.js';
 import messageRouter from './routes/messages.js';
 import reviewRouter from './routes/reviews.js';
@@ -37,8 +39,10 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 // Start of actions
 app.use('/', authRouter);
 app.use('/complaints', complaintRouter);
+app.use('/courses', courseRouter);
 app.use('/contacts', contactRouter);
 app.use('/events', eventRouter);
+app.use('/exams', examRouter);
 app.use('/messages', messageRouter);
 app.use('/notifications', notificationRouter);
 app.use('/reviews', reviewRouter);

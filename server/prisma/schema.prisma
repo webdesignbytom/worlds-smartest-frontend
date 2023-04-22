@@ -16,6 +16,7 @@ model Course {
   numSemesters Int        @default(3)
   totalScore   Int        @default(6000) // Total score achievable for everything over the year
   numUsers     Int        @default(0) // Total number of active players
+  isActive     Boolean    @default(false) // Is this the current course
   startDate    DateTime?
   endDate      DateTime?
   createdAt    DateTime   @default(now())
@@ -32,6 +33,7 @@ model Semester {
   exams             Exam[]
   metaData          SemesterMeta?
   semesterTakeTable SemesterTakeTable?
+  isActive          Boolean            @default(false) // Is this the current semester
   startDate         DateTime?
   endDate           DateTime?
   createdAt         DateTime           @default(now())

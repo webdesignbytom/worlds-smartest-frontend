@@ -35,6 +35,7 @@ async function seed() {
       title: 'Worlds Smartest Person 2023-2024',
       description:
         'The first year the greatest intelligence exam is taking place.',
+      isActive: true,
     },
   });
 
@@ -42,6 +43,7 @@ async function seed() {
     data: {
       title: 'Autumn',
       courseId: firstCourse.id,
+      isActive: true,
     },
   });
 
@@ -68,28 +70,26 @@ async function seed() {
         'The first ever test has finally started. We have kept it simple to check nothing breaks and to ease you in. 50 random questions have been selected for you today.',
       score: 50,
       semesterId: yearOneSemester.id,
-      semesterTitle: yearOneSemester.title
+      semesterTitle: yearOneSemester.title,
     },
   });
 
   const questionOneExamOne = await dbClient.examQuestion.create({
-    data: 
-      {
-        type: 'General Knowledge',
-        category: 'Space',
-        question: 'What is the closest planet to the Sun?',
-        examId: examOne.id
-      },
+    data: {
+      type: 'General Knowledge',
+      category: 'Space',
+      question: 'What is the closest planet to the Sun?',
+      examId: examOne.id,
+    },
   });
 
   const questionTwoExamOne = await dbClient.examQuestion.create({
-    data: 
-      {
-        type: 'General Knowledge',
-        category: 'Sport',
-        question: 'What sport did Cassius Clay play?',
-        examId: examOne.id
-      },
+    data: {
+      type: 'General Knowledge',
+      category: 'Sport',
+      question: 'What sport did Cassius Clay play?',
+      examId: examOne.id,
+    },
   });
 
   const questionsOneAnswers = await dbClient.examAnswer.createMany({
@@ -110,7 +110,7 @@ async function seed() {
       {
         questionId: questionOneExamOne.id,
         content: 'Jupiter',
-      }
+      },
     ],
   });
 
