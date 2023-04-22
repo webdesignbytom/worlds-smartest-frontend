@@ -5,6 +5,7 @@ import morgan from 'morgan';
 // Path
 import { join } from 'path';
 import * as url from 'url';
+
 // Import routers
 import authRouter from './routes/auth.js';
 import courseRouter from './routes/courses.js';
