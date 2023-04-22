@@ -16,8 +16,11 @@ import notificationRouter from './routes/notifications.js';
 import messageRouter from './routes/messages.js';
 import reviewRouter from './routes/reviews.js';
 import userRouter from './routes/users.js';
-// Env
-import { HTTP_URL, PORT } from './utils/config.js';
+
+
+// Set the port and URl
+const PORT = process.env.PORT || 4000;
+const HTTP_URL = process.env.HTTP_URL;
 
 const app = express();
 app.disable('x-powered-by');
