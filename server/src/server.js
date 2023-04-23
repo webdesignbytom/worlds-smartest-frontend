@@ -7,7 +7,7 @@ import morgan from 'morgan';
 import { join } from 'path';
 import * as url from 'url';
 // Import routers
-import userRouter from './routes/users.js';
+// import userRouter from './routes/users.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -26,9 +26,13 @@ app.use(express.urlencoded({ extended: true }));
 // Create path to HTML
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-// // Routes
+// Routes
 // app.use('/users', userRouter);
 
+
+// Set the port and URl
+const PORT = process.env.PORT || 4000;
+const HTTP_URL = process.env.HTTP_URL || 'http://localhost:'
 
 // Server interface page
 app.get('/', (req, res) => {
@@ -60,3 +64,6 @@ app.use((error, req, res, next) => {
 })
 
 // Start our API server
+app.listen(PORT, () => {
+    console.log(`\nServer is running on ${HTTP_URL}${PORT} - this no longer consumes souls\n`);
+});
