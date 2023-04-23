@@ -7,7 +7,8 @@ import morgan from 'morgan';
 import { join } from 'path';
 import * as url from 'url';
 // Import routers
-// import userRouter from './routes/users.js';
+
+import userRouter from './routes/users.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -27,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 // Routes
-// app.use('/users', userRouter);
+app.use('/users', userRouter);
 
 
 // Set the port and URl

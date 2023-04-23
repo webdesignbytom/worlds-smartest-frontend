@@ -1,6 +1,4 @@
 import { Router } from 'express';
-import { getAllUsers } from '../controllers/users.js';
-import { validateAuthentication, validateAdminRole } from '../middleware/auth.js';
 
 const router = Router();
 
