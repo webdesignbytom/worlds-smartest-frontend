@@ -30,10 +30,6 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 app.use('/users', userRouter);
 
 
-// Set the port and URl
-const PORT = process.env.PORT || 4000;
-const HTTP_URL = process.env.HTTP_URL || 'http://localhost:'
-
 // Server interface page
 app.get('/', (req, res) => {
   res.sendFile('index.html', {
@@ -64,6 +60,3 @@ app.use((error, req, res, next) => {
 })
 
 // Start our API server
-app.listen(PORT, () => {
-    console.log(`\nServer is running on ${HTTP_URL}${PORT} - this no longer consumes souls\n`);
-});
