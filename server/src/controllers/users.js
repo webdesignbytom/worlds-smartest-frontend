@@ -1,12 +1,11 @@
-
 // Domain
 import { findAllUsers } from '../domain/users.js';
 import {
   sendDataResponse,
 } from '../utils/responses.js';
-// // Events
-// import { myEmitterErrors } from '../event/errorEvents.js';
-// import { myEmitterUsers } from '../event/userEvents.js';
+// Events
+import { myEmitterErrors } from '../event/errorEvents.js';
+import { myEmitterUsers } from '../event/userEvents.js';
 
 
 export const getAllUsers = async (req, res) => {
@@ -14,28 +13,28 @@ export const getAllUsers = async (req, res) => {
   try {
     const foundUsers = await findAllUsers();
 
-    // if (!foundUsers) {
-    //   const notFound = new NotFoundEvent(
-    //     req.user,
-    //     EVENT_MESSAGES.notFound,
-    //     EVENT_MESSAGES.userNotFound
-    //   );
-    //   myEmitterErrors.emit('error', notFound);
-    //   return sendMessageResponse(res, notFound.code, notFound.message);
-    // }
+    if (!foundUsers) {
+      const notFound = new NotFoundEvent(
+        req.user,
+        EVENT_MESSAGES.notFound,
+        EVENT_MESSAGES.userNotFound
+      );
+      myEmitterErrors.emit('error', notFound);
+      return sendMessageResponse(res, notFound.code, notFound.message);
+    }
 
-    // foundUsers.forEach((user) => {
-    //   console.log('user found', user);
-    //   delete user.password;
-    // });
+    foundUsers.forEach((user) => {
+      console.log('user found', user);
+      delete user.password;
+    });
 
-    // myEmitterUsers.emit('get-all-users', req.user);
+    myEmitterUsers.emit('get-all-users', req.user);
     return sendDataResponse(res, 200, { users: foundUsers });
   } catch (err) {
     // Error
-    // const serverError = new ServerErrorEvent(req.user, `Get all users`);
-    // myEmitterErrors.emit('error', serverError);
-    // sendMessageResponse(res, serverError.code, serverError.message);
+    const serverError = new ServerErrorEvent(req.user, `Get all users`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
     throw err;
   }
 };
