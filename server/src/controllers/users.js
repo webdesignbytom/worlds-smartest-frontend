@@ -1,11 +1,12 @@
 // Domain
-import { findAllUsers } from '../domain/users.js';
+import { findAllUsers, findUserByEmail, findUserById } from '../domain/users.js';
 import {
-  sendDataResponse,
+  sendDataResponse, sendMessageResponse,
 } from '../utils/responses.js';
 // Events
 import { myEmitterErrors } from '../event/errorEvents.js';
 import { myEmitterUsers } from '../event/userEvents.js';
+import { NotFoundEvent, ServerErrorEvent } from '../event/utils/errorUtils.js';
 
 
 export const getAllUsers = async (req, res) => {
@@ -39,66 +40,66 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-// export const getUserById = async (req, res) => {
-//   const userId = req.params.id;
+export const getUserById = async (req, res) => {
+  const userId = req.params.id;
 
-//   try {
-//     const foundUser = await findUserById(userId);
+  try {
+    const foundUser = await findUserById(userId);
 
-//     if (!foundUser) {
-//       const notFound = new NotFoundEvent(
-//         req.user,
-//         EVENT_MESSAGES.notFound,
-//         EVENT_MESSAGES.userNotFound
-//       );
-//       myEmitterErrors.emit('error', notFound);
-//       return sendMessageResponse(res, notFound.code, notFound.message);
-//     }
+    if (!foundUser) {
+      const notFound = new NotFoundEvent(
+        req.user,
+        EVENT_MESSAGES.notFound,
+        EVENT_MESSAGES.userNotFound
+      );
+      myEmitterErrors.emit('error', notFound);
+      return sendMessageResponse(res, notFound.code, notFound.message);
+    }
 
-//     delete foundUser.password;
+    delete foundUser.password;
 
-//     myEmitterUsers.emit('get-user', req.user);
-//     return sendDataResponse(res, 200, { user: foundUser });
-//   } catch (err) {
-//     // Error
-//     const serverError = new ServerErrorEvent(req.user, `Get user by ID`);
-//     myEmitterErrors.emit('error', serverError);
-//     sendMessageResponse(res, serverError.code, serverError.message);
-//     throw err;
-//   }
-// };
+    myEmitterUsers.emit('get-user', req.user);
+    return sendDataResponse(res, 200, { user: foundUser });
+  } catch (err) {
+    // Error
+    const serverError = new ServerErrorEvent(req.user, `Get user by ID`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};
 
-// export const getUserByEmail = async (req, res) => {
-//   console.log('get getUserByEmail');
-//   const userEmail = req.params.email;
-//   console.log('userEmail', userEmail);
+export const getUserByEmail = async (req, res) => {
+  console.log('get getUserByEmail');
+  const userEmail = req.params.email;
+  console.log('userEmail', userEmail);
 
-//   try {
-//     const foundUser = await findUserByEmail(userEmail);
+  try {
+    const foundUser = await findUserByEmail(userEmail);
 
-//     if (!foundUser) {
-//       const notFound = new NotFoundEvent(
-//         req.user,
-//         EVENT_MESSAGES.notFound,
-//         EVENT_MESSAGES.userNotFound
-//       );
-//       myEmitterErrors.emit('error', notFound);
-//       return sendMessageResponse(res, notFound.code, notFound.message);
-//     }
-//     console.log('found', foundUser);
+    if (!foundUser) {
+      const notFound = new NotFoundEvent(
+        req.user,
+        EVENT_MESSAGES.notFound,
+        EVENT_MESSAGES.userNotFound
+      );
+      myEmitterErrors.emit('error', notFound);
+      return sendMessageResponse(res, notFound.code, notFound.message);
+    }
+    console.log('found', foundUser);
 
-//     delete foundUser.password;
+    delete foundUser.password;
 
-//     myEmitterUsers.emit('get-user', req.user);
-//     return sendDataResponse(res, 200, { user: foundUser });
-//   } catch (err) {
-//     // Error
-//     const serverError = new ServerErrorEvent(req.user, `Get user by Email`);
-//     myEmitterErrors.emit('error', serverError);
-//     sendMessageResponse(res, serverError.code, serverError.message);
-//     throw err;
-//   }
-// };
+    myEmitterUsers.emit('get-user', req.user);
+    return sendDataResponse(res, 200, { user: foundUser });
+  } catch (err) {
+    // Error
+    const serverError = new ServerErrorEvent(req.user, `Get user by Email`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};
 
 // export const registerNewUser = async (req, res) => {
 //   console.log('create new user');
