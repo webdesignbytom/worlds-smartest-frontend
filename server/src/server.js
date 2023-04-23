@@ -18,24 +18,19 @@ import messageRouter from './routes/messages.js';
 import reviewRouter from './routes/reviews.js';
 import userRouter from './routes/users.js';
 
-
-// Set the port and URl
-const PORT = process.env.PORT || 4000;
-const HTTP_URL = process.env.HTTP_URL;
-
 const app = express();
 app.disable('x-powered-by');
-
-// Add middleware
-app.use(
-  cors({ 
-    origin: "*"
-  })
-);
 
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Add middleware
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 
 // Create path to HTML
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -51,6 +46,10 @@ app.use('/messages', messageRouter);
 app.use('/notifications', notificationRouter);
 app.use('/reviews', reviewRouter);
 app.use('/users', userRouter);
+
+// Set the port and URl
+const PORT = process.env.PORT || 4000;
+const HTTP_URL = process.env.HTTP_URL;
 
 // Server interface page
 app.get('/', (req, res) => {
@@ -72,14 +71,14 @@ app.all('*', (req, res) => {
 });
 
 app.use((error, req, res, next) => {
-  console.error(error)
+  console.error(error);
 
   if (error.code === 'P2025') {
-    return sendDataResponse(res, 404, 'Record does not exist')
+    return sendDataResponse(res, 404, 'Record does not exist');
   }
 
-  return sendDataResponse(res, 500)
-})
+  return sendDataResponse(res, 500);
+});
 
 // Start our API server
 app.listen(PORT, () => {
