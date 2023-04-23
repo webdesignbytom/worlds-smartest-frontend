@@ -26,8 +26,8 @@ app.use(express.urlencoded({ extended: true }));
 // Create path to HTML
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-// Routes
-app.use('/users', userRouter);
+// // Routes
+// app.use('/users', userRouter);
 
 
 // Server interface page
