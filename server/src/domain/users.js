@@ -25,24 +25,39 @@ export const findUsersByRole = (role) =>
       role: role,
     },
   });
+
 export const createUser = (
-  email,
-  password,
-  role,
-  firstName,
-  lastName,
-  country,
-  agreedToTerms
+  lowerCaseEmail,
+  hashedPassword,
+  lowerCaseFirstName,
+  lowerCaseLastName,
+  lowerCaseCountry,
+  lowerCaseCity,
+  lowerCaseUsername,
+  gender,
+  dob,
+  agreedToTerms,
+  profileImage,
+  bio
 ) =>
   dbClient.user.create({
     data: {
-      email: email,
-      password: password,
-      role: role,
-      firstName: firstName,
-      lastName: lastName,
-      country: country,
+      email: lowerCaseEmail,
+      password: hashedPassword,
       agreedToTerms: agreedToTerms,
+      profile: {
+        create: {
+          firstName: lowerCaseFirstName,
+          lastName: lowerCaseLastName,
+          country: lowerCaseCountry,
+          city: lowerCaseCity,
+          gender: gender,
+          dob: dob,
+          profileImage: profileImage,
+          bio: bio,
+          username: lowerCaseUsername,
+        }
+      }
     },
   });
 

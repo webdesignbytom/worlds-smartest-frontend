@@ -195,18 +195,19 @@ model LoginData {
   createdAt DateTime @default(now())
 }
 
+// add uni, job, title, newsletter
 model Profile {
   id            String            @id @default(uuid())
   userId        String            @unique
   user          User              @relation(fields: [userId], references: [id])
   username      String            @unique @db.VarChar(28)
-  city          String?           @db.VarChar(100)
+  city          String            @db.VarChar(100)
   country       String            @default("Earth")
-  gender        String?
+  gender        String
   dob           DateTime          @default(now())
   mediaAccounts SocialMediaLink[]
   firstName     String            @default("") @db.VarChar(50)
-  lastName      String?           @default("") @db.VarChar(50)
+  lastName      String           @default("") @db.VarChar(50)
   bio           String?           @default("") @db.VarChar(1000)
   profileImage  String?           @default("https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png")
   isPrivate     Boolean           @default(false)

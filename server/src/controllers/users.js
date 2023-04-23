@@ -1,13 +1,23 @@
 // Domain
-import { findAllUsers, findUserByEmail, findUserById } from '../domain/users.js';
 import {
-  sendDataResponse, sendMessageResponse,
-} from '../utils/responses.js';
+  createUser,
+  findAllUsers,
+  findUserByEmail,
+  findUserById,
+} from '../domain/users.js';
+import { EVENT_MESSAGES, sendDataResponse, sendMessageResponse } from '../utils/responses.js';
 // Events
 import { myEmitterErrors } from '../event/errorEvents.js';
 import { myEmitterUsers } from '../event/userEvents.js';
-import { NotFoundEvent, ServerErrorEvent } from '../event/utils/errorUtils.js';
-
+import {
+  BadRequestEvent,
+  MissingFieldEvent,
+  NotFoundEvent,
+  RegistrationServerErrorEvent,
+  ServerErrorEvent,
+} from '../event/utils/errorUtils.js';
+import bcrypt from 'bcrypt';
+const hashRate = 9;
 
 export const getAllUsers = async (req, res) => {
   console.log('Get all users');
@@ -95,6 +105,102 @@ export const getUserByEmail = async (req, res) => {
   } catch (err) {
     // Error
     const serverError = new ServerErrorEvent(req.user, `Get user by Email`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};
+
+export const registerNewUser = async (req, res) => {
+  console.log('Registering new user');
+
+  const {
+    email,
+    password,
+    username,
+    firstName,
+    lastName,
+    city,
+    country,
+    gender,
+    dob,
+    profileImage,
+    bio,
+    agreedToTerms,
+  } = req.body;
+
+  const lowerCaseEmail = email.toLowerCase();
+  const lowerCaseUsername = username.toLowerCase();
+  const lowerCaseFirstName = firstName.toLowerCase();
+  const lowerCaseLastName = lastName.toLowerCase();
+  const lowerCaseCity = city.toLowerCase();
+  const lowerCaseCountry = country.toLowerCase();
+
+  try {
+    if (
+      !lowerCaseEmail ||
+      !password ||
+      !lowerCaseUsername ||
+      !lowerCaseFirstName ||
+      !lowerCaseLastName ||
+      !lowerCaseCity ||
+      !gender ||
+      !dob ||
+      !lowerCaseCountry ||
+      !agreedToTerms
+    ) {
+      //
+      const missingField = new MissingFieldEvent(
+        null,
+        'Registration: Missing Field/s event'
+      );
+      myEmitterErrors.emit('error', missingField);
+      return sendMessageResponse(res, missingField.code, missingField.message);
+    }
+
+    const foundUser = await findUserByEmail(lowerCaseEmail);
+    if (foundUser) {
+      return sendDataResponse(res, 400, { email: EVENT_MESSAGES.emailInUse });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, hashRate);
+
+    const createdUser = await createUser(
+      lowerCaseEmail,
+      hashedPassword,
+      lowerCaseFirstName,
+      lowerCaseLastName,
+      lowerCaseCountry,
+      lowerCaseCity,
+      lowerCaseUsername,
+      gender,
+      dob,
+      agreedToTerms,
+      profileImage,
+      bio,
+    );
+
+      console.log('ZZZZZZ')
+
+    if (!createdUser) {
+      console.log('AAAA')
+      const notCreated = new BadRequestEvent(
+        req.user,
+        EVENT_MESSAGES.badRequest,
+        EVENT_MESSAGES.createUserFail
+      );
+      myEmitterErrors.emit('error', notCreated);
+      return sendMessageResponse(res, notCreated.code, notCreated.message);
+    }
+
+    console.log('XX');
+    myEmitterUsers.emit('register', createdUser);
+    return sendDataResponse(res, 201, { createdUser });
+  } catch (err) {
+    // Error
+    const serverError = new RegistrationServerErrorEvent(
+      `Register user Server error`
+    );
     myEmitterErrors.emit('error', serverError);
     sendMessageResponse(res, serverError.code, serverError.message);
     throw err;

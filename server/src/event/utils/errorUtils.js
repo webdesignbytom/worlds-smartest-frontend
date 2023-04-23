@@ -145,7 +145,7 @@ export class ServerConflictError extends ErrorEventBase {
 
 export class RegistrationServerErrorEvent extends ErrorEventBase {
   constructor(topic) {
-    super(topic);
+    super(topic = 'Failed to register');
     this.code = 500;
     this.message = RESPONSE_MESSAGES.ServerErrorEvent;
   }
