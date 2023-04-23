@@ -24,10 +24,10 @@ export const getAllUsers = async (req, res) => {
     //   return sendMessageResponse(res, notFound.code, notFound.message);
     // }
 
-    foundUsers.forEach((user) => {
-      console.log('user found', user);
-      delete user.password;
-    });
+    // foundUsers.forEach((user) => {
+    //   console.log('user found', user);
+    //   delete user.password;
+    // });
 
     // myEmitterUsers.emit('get-all-users', req.user);
     return sendDataResponse(res, 200, { users: foundUsers });
