@@ -1,12 +1,12 @@
 
 // Domain
-import { findAllUsers, findUserByEmail, findUserById } from '../domain/users.js';
-// import { NotFoundEvent, ServerErrorEvent } from '../event/utils/errorUtils.js';
-// import {
-//   EVENT_MESSAGES,
-//   sendDataResponse,
-//   sendMessageResponse,
-// } from '../utils/responses.js';
+import { findAllUsers } from '../domain/users.js';
+import { NotFoundEvent, ServerErrorEvent } from '../event/utils/errorUtils.js';
+import {
+  EVENT_MESSAGES,
+  sendDataResponse,
+  sendMessageResponse,
+} from '../utils/responses.js';
 // // Events
 // import { myEmitterErrors } from '../event/errorEvents.js';
 // import { myEmitterUsers } from '../event/userEvents.js';
