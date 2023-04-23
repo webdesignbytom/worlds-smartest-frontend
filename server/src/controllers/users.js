@@ -1,6 +1,4 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import dbClient from '../utils/dbClient.js';
+
 // Domain
 import { findAllUsers, findUserByEmail, findUserById } from '../domain/users.js';
 import { NotFoundEvent, ServerErrorEvent } from '../event/utils/errorUtils.js';
@@ -107,36 +105,6 @@ export const getUserByEmail = async (req, res) => {
     throw err;
   }
 };
-
-// export const getUserById = async (req, res) => {
-//   console.log('getUserById');
-//   const userId = req.params.id;
-//   console.log('xxx');
-//   try {
-//     const foundUser = await findUserById(userId);
-//     if (!foundUser) {
-//       const notFound = new NotFoundEvent(
-//         req.user,
-//         EVENT_MESSAGES.notFound,
-//         EVENT_MESSAGES.userNotFound
-//       );
-//       myEmitterErrors.emit('error', notFound);
-//       return sendMessageResponse(res, notFound.code, notFound.message);
-//     }
-//     console.log('found', foundUser);
-//     delete foundUser.password;
-//     delete foundUser.agreedToTerms;
-
-//     myEmitterUsers.emit('get-user-by-id', req.user);
-//     return sendDataResponse(res, 200, { user: foundUser });
-//   } catch (err) {
-//     // Error
-//     const serverError = new ServerErrorEvent(req.user, `Get user by ID`);
-//     myEmitterErrors.emit('error', serverError);
-//     sendMessageResponse(res, serverError.code, serverError.message);
-//     throw err;
-//   }
-// };
 
 // export const registerNewUser = async (req, res) => {
 //   console.log('create new user');
