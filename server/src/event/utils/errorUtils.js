@@ -5,11 +5,11 @@ import { RESPONSE_MESSAGES } from '../../utils/responses.js';
 // Error event creation
 export const createErrorEvent = async (errorEvent) => {
   console.log('TTTTT', errorEvent);
-  let userId = errorEvent.user || null
+  let userId = errorEvent.user || 'null'
 
-  if (userId) {
-    userId = errorEvent.user.id;
-  }
+  // if (userId !== null || undefined) {
+  //   userId = errorEvent.user.id;
+  // }
 
   let codeId;
   if (errorEvent.code) {
@@ -20,7 +20,7 @@ export const createErrorEvent = async (errorEvent) => {
       type: 'ERROR',
       topic: errorEvent.topic,
       content: `${errorEvent.code} ${errorEvent.message}`,
-      receivedById: userId,
+      // receivedById: 'test-id',
       code: codeId,
     },
   });

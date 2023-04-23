@@ -1,82 +1,112 @@
-// import jwt from 'jsonwebtoken';
-// import bcrypt from 'bcrypt';
-// import dbClient from '../utils/dbClient.js';
-// // Components
-// import { createVerificationInDB, createPasswordResetInDB } from './utils.js';
-// // Emitters
-// import { myEmitterUsers } from '../event/userEvents.js';
-// import { myEmitterErrors } from '../event/errorEvents.js';
-// import {
-//   findAllUsers,
-//   findUserByEmail,
-//   createUser,
-//   findVerification,
-//   findResetRequest,
-//   findUserById,
-//   resetUserPassword,
-//   deleteUserById,
-//   updateUserById,
-//   findUsersByRole,
-// } from '../domain/users.js';
-// import { createAccessToken } from '../utils/tokens.js';
-// import {
-//   sendVerificationEmail,
-//   sendResetPasswordEmail,
-//   testEmail,
-// } from '../utils/sendEmail.js';
-// // Response messages
-// import {
-//   EVENT_MESSAGES,
-//   sendDataResponse,
-//   sendMessageResponse,
-// } from '../utils/responses.js';
-// import {
-//   NotFoundEvent,
-//   ServerErrorEvent,
-//   MissingFieldEvent,
-//   RegistrationServerErrorEvent,
-//   ServerConflictError,
-//   BadRequestEvent,
-// } from '../event/utils/errorUtils.js';
-// // Time
-// import { v4 as uuid } from 'uuid';
-// import { createNewNotification } from '../domain/notifications.js';
-// import { createMessage } from '../domain/messages.js';
-// // Password hash
-// const hashRate = 8;
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import dbClient from '../utils/dbClient.js';
+// Domain
+import { findAllUsers, findUserByEmail, findUserById } from '../domain/users.js';
+import { NotFoundEvent, ServerErrorEvent } from '../event/utils/errorUtils.js';
+import {
+  EVENT_MESSAGES,
+  sendDataResponse,
+  sendMessageResponse,
+} from '../utils/responses.js';
+// Events
+import { myEmitterErrors } from '../event/errorEvents.js';
+import { myEmitterUsers } from '../event/userEvents.js';
 
-// export const sendTestyEmail = async (req, res) => {
-//   console.log('testin');
-//   const { email } = req.params;
-//   console.log('email', email);
-//   await testEmail(email);
-// };
+// Password hash
+const hashRate = 9;
 
-// export const getAllUsers = async (req, res) => {
-//   console.log('getAllUsers');
-//   try {
-//     const foundUsers = await findAllUsers();
-    
-//     if (!foundUsers) {
-//       const notFound = new NotFoundEvent(
-//         req.user,
-//         EVENT_MESSAGES.notFound,
-//         EVENT_MESSAGES.userNotFound
-//       );
-//       myEmitterErrors.emit('error', notFound);
-//       return sendMessageResponse(res, notFound.code, notFound.message);
-//     }
+export const getAllUsers = async (req, res) => {
+  console.log('Get all users');
+  try {
+    const foundUsers = await findAllUsers();
 
-//     // myEmitterUsers.emit('get-all-users', req.user);
-//     return sendDataResponse(res, 200, { users: foundUsers });
-//   } catch (err) {
-//     // Error
-//     const serverError = new ServerErrorEvent(req.user, `Get all users`);
-//     myEmitterErrors.emit('error', serverError);
-//     sendMessageResponse(res, serverError.code, serverError.message);
-//     throw err;
-//   }
-// };
+    if (!foundUsers) {
+      const notFound = new NotFoundEvent(
+        req.user,
+        EVENT_MESSAGES.notFound,
+        EVENT_MESSAGES.userNotFound
+      );
+      myEmitterErrors.emit('error', notFound);
+      return sendMessageResponse(res, notFound.code, notFound.message);
+    }
+
+    foundUsers.forEach((user) => {
+      console.log('user found', user);
+      delete user.password;
+    });
+
+    myEmitterUsers.emit('get-all-users', req.user);
+    return sendDataResponse(res, 200, { users: foundUsers });
+  } catch (err) {
+    // Error
+    const serverError = new ServerErrorEvent(req.user, `Get all users`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};
+
+export const getUserById = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const foundUser = await findUserById(userId);
+
+    if (!foundUser) {
+      const notFound = new NotFoundEvent(
+        req.user,
+        EVENT_MESSAGES.notFound,
+        EVENT_MESSAGES.userNotFound
+      );
+      myEmitterErrors.emit('error', notFound);
+      return sendMessageResponse(res, notFound.code, notFound.message);
+    }
+
+    delete foundUser.password;
+
+    myEmitterUsers.emit('get-user', req.user);
+    return sendDataResponse(res, 200, { user: foundUser });
+  } catch (err) {
+    // Error
+    const serverError = new ServerErrorEvent(req.user, `Get user by ID`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};
+
+export const getUserByEmail = async (req, res) => {
+  console.log('get getUserByEmail');
+  const userEmail = req.params.email;
+  console.log('userEmail', userEmail);
+
+  try {
+    const foundUser = await findUserByEmail(userEmail);
+
+    if (!foundUser) {
+      const notFound = new NotFoundEvent(
+        req.user,
+        EVENT_MESSAGES.notFound,
+        EVENT_MESSAGES.userNotFound
+      );
+      myEmitterErrors.emit('error', notFound);
+      return sendMessageResponse(res, notFound.code, notFound.message);
+    }
+    console.log('found', foundUser);
+
+    delete foundUser.password;
+
+    myEmitterUsers.emit('get-user', req.user);
+    return sendDataResponse(res, 200, { user: foundUser });
+  } catch (err) {
+    // Error
+    const serverError = new ServerErrorEvent(req.user, `Get user by Email`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};
 
 // export const getUserById = async (req, res) => {
 //   console.log('getUserById');

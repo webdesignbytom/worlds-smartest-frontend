@@ -7,16 +7,16 @@ export const findAllUsers = () =>
     },
   });
 
+export const findUserById = (userId) =>
+  dbClient.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
 export const findUserByEmail = (email) =>
   dbClient.user.findUnique({
     where: { email: email },
-    include: {
-      messages: true,
-      notifications: true,
-      favorites: true,
-      designs: true,
-      projects: true,
-    },
   });
 
 export const findUsersByRole = (role) =>
@@ -57,20 +57,6 @@ export const findResetRequest = (userId) =>
   dbClient.passwordReset.findUnique({
     where: {
       userId: userId,
-    },
-  });
-
-export const findUserById = (userId) =>
-  dbClient.user.findUnique({
-    where: {
-      id: userId,
-    },
-    include: {
-      messages: true,
-      notifications: true,
-      favorites: true,
-      designs: true,
-      projects: true,
     },
   });
 
