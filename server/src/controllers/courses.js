@@ -18,7 +18,7 @@ import {
   MissingFieldEvent,
   BadRequestEvent,
 } from '../event/utils/errorUtils.js';
-import { myEmitterCourse } from '../event/courseEvent.js';
+import { myEmitterCourse } from '../event/courseEvents.js';
 
 // Get all courses - available to all users
 export const getAllCourses = async (req, res) => {

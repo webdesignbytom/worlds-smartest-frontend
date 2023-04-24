@@ -46,6 +46,12 @@ export const EVENT_MESSAGES = {
   userReviewsNotFound: `Failed to find user reviews`,
   createReviewFail: `Failed to create review`,
   markReviewViewedFailed: `Failed to mark review as viewed`,
+  // Questions
+  questionsTag: `Question database`,
+  notFoundQuestion: `Failed to find question/s`,
+  userQuestionsNotFound: `Failed to find user questions`,
+  createQuestionFail: `Failed to create question`,
+  markQuestionViewedFailed: `Failed to mark question as viewed`,
   // Semesters
   semesterTag: `Semester database`,
   semesterNotFound: `Failed to find semester`,

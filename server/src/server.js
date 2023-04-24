@@ -13,6 +13,7 @@ import courseRouter from './routes/courses.js';
 import examRouter from './routes/exams.js';
 import semesterRouter from './routes/semesters.js';
 import bugReportsRouter from './routes/bugReports.js';
+import questionsRouter from './routes/questions.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -37,6 +38,7 @@ app.use('/courses', courseRouter);
 app.use('/exams', examRouter);
 app.use('/semesters', semesterRouter);
 app.use('/bug-reports', bugReportsRouter);
+app.use('/questions', questionsRouter);
 
 // Set the port and URl
 const PORT = process.env.PORT || 4000;

@@ -8,3 +8,4 @@ export const VERIFY_PASS = process.env.VERIFY_PASS
 export const RESET_PASS_URL = process.env.RESET_PASS_URL
 export const RESET_EMAIL = process.env.RESET_EMAIL
 export const RESET_PASS = process.env.RESET_PASS
+export const DEV_PASS = process.env.DEV_PASS
