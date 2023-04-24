@@ -97,7 +97,7 @@ async function seed() {
       {
         questionId: questionOneExamOne.id,
         content: 'Mercury',
-        correct: true,
+        isCorrect: true,
       },
       {
         questionId: questionOneExamOne.id,

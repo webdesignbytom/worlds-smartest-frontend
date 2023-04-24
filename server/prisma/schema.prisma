@@ -78,6 +78,7 @@ model Exam {
   semesterTitle String
   semesterId    Int
   semester      Semester        @relation(fields: [semesterId], references: [id])
+    isActive          Boolean            @default(false) // Is this the current semester
   startDate     DateTime?
   endDate       DateTime?
   createdAt     DateTime        @default(now())
@@ -111,7 +112,7 @@ model ExamQuestion {
 model ExamAnswer {
   id         Int          @id @default(autoincrement())
   active     Boolean      @default(true) // Is the question visible to users
-  correct    Boolean      @default(false) // Did they answer correctly
+  isCorrect    Boolean      @default(false) // Did they answer correctly
   content    String // One or multiple answers
   questionId Int
   question   ExamQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
