@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // Utils
 import CountrySelect from '../../users/utils/CountrySelect';
-import { registerDataTemplate } from '../../users/utils/Utils';
+import { registerDataTemplate } from '../../users/utils/utils';
 
 function RegisterForm() {
   const [registerData, setRegisterData] = useState(registerDataTemplate);
