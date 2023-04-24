@@ -50,6 +50,7 @@ export const EVENT_MESSAGES = {
   semesterTag: `Semester database`,
   semesterNotFound: `Failed to find semester`,
   createSemesterFail: `Failed to create semester`,
+  semesterAlreadyExists: `Semester already exists`,
   // Users
   userTag: `User databased`,
   userNotFound: `Failed to find user/s`,

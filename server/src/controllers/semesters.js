@@ -2,8 +2,10 @@
 import { myEmitterErrors } from '../event/errorEvents.js';
 // Requests
 import {
+  createSemester,
   findAllSemesters,
   findCurrentCourseSemester,
+  findSemesterByData,
   findSemesterById,
   findSemestersByCourse,
 } from '../domain/semesters.js';
@@ -18,6 +20,7 @@ import {
   NotFoundEvent,
   ServerErrorEvent,
   MissingFieldEvent,
+  BadRequestEvent,
 } from '../event/utils/errorUtils.js';
 
 export const getAllSemesters = async (req, res) => {
@@ -86,7 +89,7 @@ export const getCurrentSemester = async (req, res) => {
 
 export const getSemesterById = async (req, res) => {
   console.log('Get semester by Id');
-  const semesterId = Number(req.params.id)
+  const semesterId = Number(req.params.id);
   console.log('semesterId', semesterId);
 
   try {
@@ -121,7 +124,7 @@ export const getSemesterById = async (req, res) => {
 
 export const getYearlySemesters = async (req, res) => {
   console.log('Get semesters for year');
-  const courseId = Number(req.params.id)
+  const courseId = Number(req.params.id);
   console.log('courseId', courseId);
 
   try {
@@ -148,6 +151,57 @@ export const getYearlySemesters = async (req, res) => {
   } catch (err) {
     //
     const serverError = new ServerErrorEvent(req.user, `Get current semester`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};
+
+export const createNewSemester = async (req, res) => {
+  console.log('create new semester');
+  const { title, courseId } = req.body;
+  console.log('req', req.body);
+
+  try {
+    //
+    if (!title || !courseId) {
+      const missingField = new MissingFieldEvent(
+        null,
+        'Create semester: Missing Field/s event'
+      );
+      myEmitterErrors.emit('error', missingField);
+      return sendMessageResponse(res, missingField.code, missingField.message);
+    }
+
+    const foundSemester = await findSemesterByData(title, courseId);
+    console.log('foundSemester', foundSemester);
+
+    if (foundSemester) {
+      return sendDataResponse(res, 400, {
+        semester: EVENT_MESSAGES.semesterAlreadyExists,
+        foundSemester: foundSemester,
+      });
+    }
+
+    const newSemester = await createSemester(title, courseId);
+    console.log('newSemester', newSemester);
+
+    if (!newSemester) {
+      const notCreated = new BadRequestEvent(
+        req.user,
+        EVENT_MESSAGES.badRequest,
+        EVENT_MESSAGES.createSemesterFail
+      );
+      myEmitterErrors.emit('error', notCreated);
+      return sendMessageResponse(res, notCreated.code, notCreated.message);
+    }
+
+    // myEmitterComplaints.emit('get-current-course', req.user);
+    return sendDataResponse(res, 200, { semester: newSemester });
+    //
+  } catch (err) {
+    //
+    const serverError = new ServerErrorEvent(req.user, `Create semester`);
     myEmitterErrors.emit('error', serverError);
     sendMessageResponse(res, serverError.code, serverError.message);
     throw err;

@@ -39,3 +39,18 @@ export const findSemestersByCourse = (courseId) =>
       exams: true,
     },
   });
+
+export const findSemesterByData = (title, courseId) =>
+  dbClient.semester.findFirst({
+    where: {
+      AND: [{ title: title }, { courseId: courseId }],
+    },
+  });
+
+export const createSemester = (title, courseId) =>
+  dbClient.semester.create({
+    data: {
+      courseId: courseId,
+      title: title,
+    },
+  });
