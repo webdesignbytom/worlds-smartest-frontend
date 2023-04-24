@@ -8,7 +8,7 @@ function RegisterPage() {
   return (
     <div className='relative bg-blue-300 grid grid-rows-reg h-screen min-h-screen w-full '>
       <Navbar />
-      <div className='bg-red-300 py-2 grid'>
+      <div className='bg-red-300 grid'>
         <main className='bg-green-300 grid grid-rows-reg mb-8'>
           <section>
             <article className='text-center'>
@@ -19,7 +19,7 @@ function RegisterPage() {
                 </h2>
               </div>
               <div className='px-4 py-2'>
-                <p>
+                <p className='leading-5'>
                   We collect quite a bit of information. We need this because
                   part of our test is to also collect social science data on
                   area of geographical areas of intelligence, beliefs in what
@@ -28,7 +28,7 @@ function RegisterPage() {
                 </p>
                 <p>
                   Please{' '}
-                  <Link to='terms-and-conditions'>
+                  <Link className='text-hyperlink-blue cursor-pointer' to='terms-and-conditions'>
                     <span> click here </span>
                   </Link>{' '}
                   for our data privacy policy
@@ -36,6 +36,7 @@ function RegisterPage() {
               </div>
             </article>
           </section>
+          {/* Register Form */}
           <section className='bg-blue-400 grid px-4'>
             <div className='bg-yellow-500 grid'>
               <RegisterForm />
