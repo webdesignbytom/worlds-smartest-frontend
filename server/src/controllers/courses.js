@@ -1,6 +1,10 @@
 // Emitters
 import { myEmitterErrors } from '../event/errorEvents.js';
-import { findAllCourses, findCurrentCourse } from '../domain/courses.js';
+import {
+  createCourse,
+  findAllCourses,
+  findCurrentCourse,
+} from '../domain/courses.js';
 // Response messages
 import {
   EVENT_MESSAGES,
@@ -12,9 +16,11 @@ import {
   NotFoundEvent,
   ServerErrorEvent,
   MissingFieldEvent,
+  BadRequestEvent,
 } from '../event/utils/errorUtils.js';
+import { myEmitterCourse } from '../event/courseEvent.js';
 
-// Get all courses - available to all users 
+// Get all courses - available to all users
 export const getAllCourses = async (req, res) => {
   console.log('get all courses');
   try {
@@ -78,4 +84,29 @@ export const getCurrentCourse = async (req, res) => {
   }
 };
 
+export const createNewCourse = async (req, res) => {
+  const { title, description } = req.body;
 
+  try {
+    const newCourse = await createCourse(title, description);
+    if (newCourse) {
+      const notCreated = new BadRequestEvent(
+        req.user,
+        EVENT_MESSAGES.badRequest,
+        EVENT_MESSAGES.createUserFail
+      );
+      myEmitterErrors.emit('error', notCreated);
+      return sendMessageResponse(res, notCreated.code, notCreated.message);
+    }
+
+    //TODO: add events
+    // myEmitterCourse.emit('create-course', createdUser);
+    return sendDataResponse(res, 201, { course: newCourse });
+  } catch (err) {
+    //
+    const serverError = new ServerErrorEvent(req.user, `Create new course`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};

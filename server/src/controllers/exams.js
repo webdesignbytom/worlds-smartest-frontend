@@ -15,7 +15,6 @@ import {
 } from '../event/utils/errorUtils.js';
 import { findAllExams } from '../domain/exams.js';
 
-
 export const getAllExams = async (req, res) => {
   console.log('Get all exams');
   try {
@@ -48,4 +47,6 @@ export const getAllExams = async (req, res) => {
   }
 };
 
-
+export const getAllCourseExams = async (req, res) => {
+  console.log('Get course exams');
+};

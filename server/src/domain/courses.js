@@ -20,3 +20,7 @@ export const findCurrentCourse = () =>
     },
   });
 
+export const createCourse = (title, description) =>
+  dbClient.course.create({
+    data: { title: title, description: description },
+  });
