@@ -2,10 +2,20 @@ export const registerDataTemplate = {
   email: '',
   password: '',
   confirmPassword: '',
+  username: '',
   firstName: '',
   lastName: '',
+  city: '',
   country: 'United Kingdom',
+  gender: '',
+  dob: '',
+  university: '',
+  profession: '',
+  title: '',
+  bio: '',
+  profileImage: '',
   agreedToTerms: false,
+  agreedToNewsletter: false,
 };
 
 export const registerFormResponses = {
@@ -23,16 +33,22 @@ export const loginDataTemplate = {
 };
 
 export const sampleUserData = {
-  id: '',
   email: '',
+  username: '',
   firstName: '',
   lastName: '',
-  country: '',
+  city: '',
+  country: 'United Kingdom',
+  gender: '',
+  dob: '',
   role: 'USER',
-  isVerified: false,
+  university: '',
+  profession: '',
+  title: '',
+  bio: '',
   profileImage: '',
-  createdAt: '',
-  updatedAt: '',
+  agreedToTerms: false,
+  agreedToNewsletter: false,
 };
 
 export const statusResults = {
