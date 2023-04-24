@@ -11,6 +11,7 @@ import * as url from 'url';
 import userRouter from './routes/users.js';
 import courseRouter from './routes/courses.js';
 import examRouter from './routes/exams.js';
+import semesterRouter from './routes/semesters.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -33,6 +34,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 app.use('/users', userRouter);
 app.use('/courses', courseRouter);
 app.use('/exams', examRouter);
+app.use('/semesters', semesterRouter);
 
 // Set the port and URl
 const PORT = process.env.PORT || 4000;

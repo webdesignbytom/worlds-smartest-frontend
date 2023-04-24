@@ -13,7 +13,7 @@ import {
   ServerErrorEvent,
   MissingFieldEvent,
 } from '../event/utils/errorUtils.js';
-import { findAllExams } from '../domain/exams.js';
+import { createExam, findAllExams } from '../domain/exams.js';
 
 export const getAllExams = async (req, res) => {
   console.log('Get all exams');
@@ -49,4 +49,47 @@ export const getAllExams = async (req, res) => {
 
 export const getAllCourseExams = async (req, res) => {
   console.log('Get course exams');
+};
+
+export const createNewExam = async (req, res) => {
+  console.log('create new exam');
+  const {
+    title,
+    metaTitle,
+    slug,
+    summary,
+    type,
+    score,
+    semesterTitle,
+    semesterId,
+    startDate,
+    endDate,
+  } = req.body;
+  console.log('req', req.body);
+  try {
+    // Find all exams
+    const createdExam = await createExam(
+      title,
+      metaTitle,
+      slug,
+      summary,
+      type,
+      score,
+      semesterTitle,
+      semesterId,
+      startDate,
+      endDate
+    );
+
+    console.log('created', createdExam);
+    // myEmitterComplaints.emit('get-current-course', req.user);
+    // return sendDataResponse(res, 200, { exams: foundExams });
+    //
+  } catch (err) {
+    //
+    const serverError = new ServerErrorEvent(req.user, `Get all exams`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
 };
