@@ -1,17 +1,15 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 // Data
-import { sampleUserData } from '../users/utils/Utils';
 import LoggedInUser from '../utils/LoggedInUser';
+import { sampleUserData } from '../users/utils/utils';
 // Fetch
 import client from '../utils/axios/client';
 // Context
 export const UserContext = React.createContext();
 
-const initUserState = sampleUserData;
-
 const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState(initUserState);
+  const [user, setUser] = useState(sampleUserData);
   const [token, setToken] = useState(
     localStorage.getItem(process.env.REACT_APP_USER_TOKEN) || ''
   );
