@@ -8,10 +8,8 @@ import client from '../utils/axios/client';
 // Context
 export const UserContext = React.createContext();
 
-const initUserState = sampleUserData;
-
 const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState(initUserState);
+  const [user, setUser] = useState(sampleUserData);
   const [token, setToken] = useState(
     localStorage.getItem(process.env.REACT_APP_USER_TOKEN) || ''
   );
