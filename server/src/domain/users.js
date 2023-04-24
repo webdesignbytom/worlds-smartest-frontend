@@ -19,6 +19,11 @@ export const findUserByEmail = (email) =>
     where: { email: email },
   });
 
+export const findUserByUsername = (username) =>
+  dbClient.profile.findUnique({
+    where: { username: username },
+  });
+
 export const findUsersByRole = (role) =>
   dbClient.user.findMany({
     where: {
@@ -38,13 +43,18 @@ export const createUser = (
   dob,
   agreedToTerms,
   profileImage,
-  bio
+  bio,
+  agreedToNewsletter,
+  university,
+  profession,
+  title
 ) =>
   dbClient.user.create({
     data: {
       email: lowerCaseEmail,
       password: hashedPassword,
       agreedToTerms: agreedToTerms,
+      agreedToNewsletter: agreedToNewsletter,
       profile: {
         create: {
           firstName: lowerCaseFirstName,
@@ -56,8 +66,11 @@ export const createUser = (
           profileImage: profileImage,
           bio: bio,
           username: lowerCaseUsername,
-        }
-      }
+          profession: profession,
+          university: university,
+          title: title,
+        },
+      },
     },
   });
 

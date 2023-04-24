@@ -4,8 +4,13 @@ import {
   findAllUsers,
   findUserByEmail,
   findUserById,
+  findUserByUsername,
 } from '../domain/users.js';
-import { EVENT_MESSAGES, sendDataResponse, sendMessageResponse } from '../utils/responses.js';
+import {
+  EVENT_MESSAGES,
+  sendDataResponse,
+  sendMessageResponse,
+} from '../utils/responses.js';
 // Events
 import { myEmitterErrors } from '../event/errorEvents.js';
 import { myEmitterUsers } from '../event/userEvents.js';
@@ -20,7 +25,6 @@ import bcrypt from 'bcrypt';
 const hashRate = 9;
 
 export const getAllUsers = async (req, res) => {
-  console.log('Get all users');
   try {
     const foundUsers = await findAllUsers();
 
@@ -35,7 +39,6 @@ export const getAllUsers = async (req, res) => {
     }
 
     foundUsers.forEach((user) => {
-      console.log('user found', user);
       delete user.password;
     });
 
@@ -80,9 +83,7 @@ export const getUserById = async (req, res) => {
 };
 
 export const getUserByEmail = async (req, res) => {
-  console.log('get getUserByEmail');
   const userEmail = req.params.email;
-  console.log('userEmail', userEmail);
 
   try {
     const foundUser = await findUserByEmail(userEmail);
@@ -96,7 +97,6 @@ export const getUserByEmail = async (req, res) => {
       myEmitterErrors.emit('error', notFound);
       return sendMessageResponse(res, notFound.code, notFound.message);
     }
-    console.log('found', foundUser);
 
     delete foundUser.password;
 
@@ -112,8 +112,6 @@ export const getUserByEmail = async (req, res) => {
 };
 
 export const registerNewUser = async (req, res) => {
-  console.log('Registering new user');
-
   const {
     email,
     password,
@@ -127,6 +125,10 @@ export const registerNewUser = async (req, res) => {
     profileImage,
     bio,
     agreedToTerms,
+    agreedToNewsletter,
+    university,
+    profession,
+    title,
   } = req.body;
 
   const lowerCaseEmail = email.toLowerCase();
@@ -158,11 +160,20 @@ export const registerNewUser = async (req, res) => {
       return sendMessageResponse(res, missingField.code, missingField.message);
     }
 
-    const foundUser = await findUserByEmail(lowerCaseEmail);
-    if (foundUser) {
+    // Check for unique fields
+    const foundUserEmail = await findUserByEmail(lowerCaseEmail);
+    const foundUserUsername = await findUserByUsername(lowerCaseUsername);
+
+    if (foundUserEmail) {
       return sendDataResponse(res, 400, { email: EVENT_MESSAGES.emailInUse });
     }
+    if (foundUserUsername) {
+      return sendDataResponse(res, 400, {
+        email: EVENT_MESSAGES.usernameInUse,
+      });
+    }
 
+    // Create a new user and hash password
     const hashedPassword = await bcrypt.hash(password, hashRate);
 
     const createdUser = await createUser(
@@ -178,12 +189,13 @@ export const registerNewUser = async (req, res) => {
       agreedToTerms,
       profileImage,
       bio,
+      agreedToNewsletter,
+      university,
+      profession,
+      title
     );
 
-      console.log('ZZZZZZ')
-
     if (!createdUser) {
-      console.log('AAAA')
       const notCreated = new BadRequestEvent(
         req.user,
         EVENT_MESSAGES.badRequest,
@@ -193,9 +205,10 @@ export const registerNewUser = async (req, res) => {
       return sendMessageResponse(res, notCreated.code, notCreated.message);
     }
 
-    console.log('XX');
+    delete createdUser.password;
+
     myEmitterUsers.emit('register', createdUser);
-    return sendDataResponse(res, 201, { createdUser });
+    return sendDataResponse(res, 201, { user: createdUser });
   } catch (err) {
     // Error
     const serverError = new RegistrationServerErrorEvent(
