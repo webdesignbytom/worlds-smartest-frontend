@@ -10,17 +10,21 @@ import AboutPage from './pages/about/AboutPage';
 import Error404 from './pages/error/Error404';
 import BetaTestQuestions from './pages/beta/BetaTestQuestions';
 import PrivacyPolicy from './pages/policy/PrivacyPolicy';
+import { AuthenticateAdmin } from './utils/AuthenticateUser';
+import AdminOverview from './pages/admin/AdminOverview';
+import CreateExams from './pages/admin/CreateExams';
+import CreateCourse from './pages/admin/CreateCourse';
 
 function App() {
   ReactGA.initialize('G-2DWCKVD9WK');
   ReactGA.pageview('/');
 
   useEffect(() => {
-    console.log('doc', document.location) // urls of page
-    console.log('cookie', document.cookie)
-    console.log('nav', navigator.userAgent) // browser
-    console.log('nav', navigator.language) // language
-  }, [])
+    console.log('doc', document.location); // urls of page
+    console.log('cookie', document.cookie);
+    console.log('nav', navigator.userAgent); // browser
+    console.log('nav', navigator.language); // language
+  }, []);
   return (
     <Routes>
       <Route path='/' index element={<HomePage />} />
@@ -31,6 +35,31 @@ function App() {
         path='/beta-test-questions'
         index
         element={<BetaTestQuestions />}
+      />
+
+      <Route
+        path='/admin'
+        element={
+          <AuthenticateAdmin>
+            <AdminOverview />
+          </AuthenticateAdmin>
+        }
+      />
+      <Route
+        path='/admin'
+        element={
+          <AuthenticateAdmin>
+            <CreateExams />
+          </AuthenticateAdmin>
+        }
+      />
+      <Route
+        path='/admin'
+        element={
+          <AuthenticateAdmin>
+            <CreateCourse />
+          </AuthenticateAdmin>
+        }
       />
 
       {/* Util Routes */}
