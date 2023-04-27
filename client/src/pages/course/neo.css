@@ -1,0 +1,11 @@
+:root {
+  --hue: 184;
+  --bg: hsl(var(--hue), 10%, 90%);
+  --fg: hsl(var(--hue), 66%, 24%);
+}
+
+.profile__neo {
+  background: #d1d8ec;
+  -webkit-box-shadow: 10px 10px 29px #797d89, -10px -10px 29px #ffffff;
+  box-shadow: 10px 10px 29px #797d89, -10px -10px 29px #ffffff;
+}
