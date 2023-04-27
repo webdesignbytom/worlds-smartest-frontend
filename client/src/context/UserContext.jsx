@@ -1,17 +1,17 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React from "react";
+import { useEffect, useState } from "react";
 // Data
-import LoggedInUser from '../utils/LoggedInUser';
-import { sampleUserData } from '../users/utils/utils';
+import LoggedInUser from "../utils/LoggedInUser";
+import { sampleUserData } from "../users/utils/utils";
 // Fetch
-import client from '../utils/axios/client';
+import client from "../utils/axios/client";
 // Context
 export const UserContext = React.createContext();
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(sampleUserData);
   const [token, setToken] = useState(
-    localStorage.getItem(process.env.REACT_APP_USER_TOKEN) || ''
+    localStorage.getItem(process.env.REACT_APP_USER_TOKEN) || ""
   );
   const [toggleCookiePolicy, setToggleCookiePolicy] = useState(false);
 
@@ -27,11 +27,11 @@ const UserContextProvider = ({ children }) => {
           setUser(res.data.data.user);
         })
         .catch((err) => {
-          console.error('Unable to retrieve user data', err);
+          console.error("Unable to retrieve user data", err);
         });
     }
 
-    const cookie = localStorage.getItem('CookiePolicy');
+    const cookie = localStorage.getItem("CookiePolicy");
 
     if (cookie) {
       setToggleCookiePolicy(true);
