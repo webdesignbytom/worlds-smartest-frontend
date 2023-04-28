@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CourseContext } from "../../context/CourseContext";
 import CourseDataOverview from "./CourseDataOverview";
-import NewsfeedContainer from '../newsfeed/NewsfeedContainer';
+import NewsfeedContainer from "../newsfeed/NewsfeedContainer";
+import CourseUserOverview from "./CourseUserOverview";
 
 function CourseDataPanel() {
   const { currentCourseData } = useContext(CourseContext);
@@ -63,7 +64,7 @@ function CourseDataPanel() {
             {/* News feed */}
             <NewsfeedContainer />
             {/* User Overview */}
-            <section className="grid bg-neo-alt rounded-xl">a</section>
+            <CourseUserOverview />
           </section>
           <section className="grid bg-neo-alt rounded-xl">b</section>
         </section>

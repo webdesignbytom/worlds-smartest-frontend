@@ -5,11 +5,13 @@ import LoggedInUser from "../utils/LoggedInUser";
 import { sampleUserData } from "../users/utils/utils";
 // Fetch
 import client from "../utils/axios/client";
+import { userRecordInitData } from "../utils/data/UserData";
 // Context
 export const UserContext = React.createContext();
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(sampleUserData);
+  const [userRecords, setUserRecords] = useState(userRecordInitData);
   const [token, setToken] = useState(
     localStorage.getItem(process.env.REACT_APP_USER_TOKEN) || ""
   );
@@ -47,6 +49,8 @@ const UserContextProvider = ({ children }) => {
         setToken,
         toggleCookiePolicy,
         setToggleCookiePolicy,
+        userRecords,
+        setUserRecords,
       }}
     >
       {children}
