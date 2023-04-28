@@ -13,7 +13,7 @@ function Navbar() {
   }, []);
 
   return (
-    <header className="grid text-gray-100 h-fit p-6 items-center">
+    <header className="grid text-gray-100 h-fit pt-3 px-3 md:p-6 items-center">
       <div className="grid grid-flow-col justify-between bg-neo w-full py-4 px-10 rounded-2xl">
         <section className="pl-2 no__highlights">
           <Link to="/">
