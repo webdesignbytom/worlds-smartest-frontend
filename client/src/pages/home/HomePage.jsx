@@ -7,7 +7,7 @@ import BetaModal from '../../components/home/BetaModal';
 
 function HomePage() {
   return (
-    <div className='bg-gray-50 dark:bg-black grid h-screen lg:max-h-screen lg:overflow-hidden dark:text-gray-100'>
+    <div className='bg-main-colour grid h-screen lg:max-h-screen lg:overflow-hidden text-gray-100'>
       <main className='relative grid grid-rows-rev h-full'>
         {/* Question mark */}
         <QuestionModal />

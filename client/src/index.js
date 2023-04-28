@@ -1,19 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
 // Context
-import UserContextProvider from './context/UserContext';
-import ToggleContextProvider from './context/ToggleContext';
+import UserContextProvider from "./context/UserContext";
+import ToggleContextProvider from "./context/ToggleContext";
+import CourseContextProvider from "./context/CourseContext";
 // Styles
-import './styles/index.css';
+import "./styles/index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <UserContextProvider>
       <ToggleContextProvider>
-        <App />
+        <CourseContextProvider>
+          <App />
+        </CourseContextProvider>
       </ToggleContextProvider>
     </UserContextProvider>
   </BrowserRouter>

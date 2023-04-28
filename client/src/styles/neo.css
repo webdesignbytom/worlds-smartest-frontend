@@ -1,0 +1,16 @@
+.bg-neo {
+  background: #26272b;
+  box-shadow: 5.11px 5.11px 17px #100f0f, -5.11px -5.11px 17px #3a3b3e;
+  background: linear-gradient(145deg, #1d1e21, #2e2e31);
+}
+
+.bg-neo-alt {
+    background: linear-gradient(145deg, #1d1e21, #2e2e31);
+    box-shadow: 3.6px 3.6px 5px #100f0f, -3.6px -3.6px 5px #3a3b3e;
+}
+
+.bg-neo-in {
+  background: linear-gradient(145deg, #1d1e21, #2e2e31);
+  box-shadow: inset 5.11px 5.11px 17px #100f0f,
+    inset -5.11px -5.11px 17px #3a3b3e;
+}

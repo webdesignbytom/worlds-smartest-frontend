@@ -14,8 +14,9 @@ module.exports = {
         3: "3px",
       },
       colors: {
-        "neo": "hsl(184,10%,90%)",
-        "main-colour": "#1F2937",
+        navbg: "linear-gradient(145deg, #1d1e21, #2e2e31)",
+        neo: "hsl(184,10%,90%)",
+        "main-colour": "#242528",
         "nav-colour": "#1F2937",
         "footer-colour": "#1F2937",
         "colour-pale": "#f1f5f9",
@@ -64,6 +65,7 @@ module.exports = {
         "2a": "2fr 1fr auto",
         "3a": "1fr 1fr 0.7fr auto",
         "3x": "3fr 1fr",
+        x3: "1fr 4fr",
         item: "50px 1fr",
       },
       width: {
