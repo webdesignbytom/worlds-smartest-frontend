@@ -2,11 +2,18 @@ import React from "react";
 // Images
 import DefaultProfileImage from "../../assets/images/default.png";
 // Styles
-import '../../styles/neo.css'
+import "../../styles/neo.css";
 
 function CourseNavbar() {
+
+  const openCourseDataComponent = (event) => {
+    const { id } = event.target
+    console.log('id: ' + id);
+  }
+
   return (
-    <section className="grid grid-rows-a1a max-w-[300px] p-4 rounded-xl bg-neo">
+
+    <section className="grid grid-rows-a1a gap-10 lg:gap-0 lg:max-w-[350px] p-4 rounded-xl bg-neo">
       {/* PROFILE IMAGE */}
       <section className="">
         <article className="text-center">
@@ -23,17 +30,25 @@ function CourseNavbar() {
       {/* Course Navigation */}
       <section className="grid mt-6 px-2">
         <div className="grid gap-4 h-fit">
-          <div className="bg-neo-alt grid items-center justify-center p-2">
-            <button>CURRENT COURSE</button>
+          <div>
+            <button id='currentCourse' onClick={openCourseDataComponent} className="bg-neo-alt grid items-center justify-center p-2 w-full">
+              CURRENT COURSE
+            </button>
           </div>
-          <div className="bg-neo-alt grid items-center justify-center p-2">
-            <button>LATEST</button>
+          <div>
+            <button id='values' onClick={openCourseDataComponent} className="bg-neo-alt grid items-center justify-center p-2 w-full">
+              VALUES
+            </button>
           </div>
-          <div className="bg-neo-alt grid items-center justify-center p-2">
-            <button>LEADERBOARD</button>
+          <div>
+            <button id='leaderboard' onClick={openCourseDataComponent} className="bg-neo-alt grid items-center justify-center p-2 w-full">
+              LEADERBOARD
+            </button>
           </div>
-          <div className="bg-neo-alt grid items-center justify-center p-2">
-            <button>STATS</button>
+          <div>
+            <button id='prizes' onClick={openCourseDataComponent} className="bg-neo-alt grid items-center justify-center p-2 w-full">
+              PRIZES
+            </button>
           </div>
         </div>
       </section>

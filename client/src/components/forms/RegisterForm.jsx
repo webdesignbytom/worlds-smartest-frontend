@@ -13,8 +13,8 @@ function RegisterForm() {
     console.log('register');
   };
   return (
-    <form onSubmit={handleRegister} className='bg-red-600 pt-2'>
-      <section className='grid gap-1 px-2 bg-blue-400'>
+    <form onSubmit={handleRegister} className=''>
+      <section className='grid gap-1'>
         {/* Title */}
         <div>
           <label htmlFor='title'>Title:</label>

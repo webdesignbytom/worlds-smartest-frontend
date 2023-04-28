@@ -6,7 +6,7 @@ function BugReport({ writeBugReport }) {
 
   return (
     <section onClick={writeBugReport} className='absolute no__highlights grid right-5 top-5 cursor-pointer'>
-      <article className='flex justify-end items-center bg-gray-200 rounded-xl'>
+      <article className='flex justify-end items-center bg-neo p-2 rounded-xl'>
         <span className='mx-2'>
           <p>BUG REPORT</p>
         </span>

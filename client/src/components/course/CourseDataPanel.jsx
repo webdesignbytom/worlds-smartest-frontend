@@ -3,6 +3,7 @@ import { CourseContext } from "../../context/CourseContext";
 import CourseDataOverview from "./CourseDataOverview";
 import NewsfeedContainer from "../newsfeed/NewsfeedContainer";
 import CourseUserOverview from "./CourseUserOverview";
+import CourseOverviewLeaderboard from '../leaderboard/CourseOverviewLeaderboard';
 
 function CourseDataPanel() {
   const { currentCourseData } = useContext(CourseContext);
@@ -39,12 +40,12 @@ function CourseDataPanel() {
   return (
     <section className="grid p-2 grid-rows-reg">
       {/* Course infomation header */}
-      <header className="grid grid-flow-col justify-between rounded-xl p-4 bg-neo-alt h-fit">
+      <header className="grid lg:grid-flow-col justify-between rounded-xl p-4 bg-neo-alt h-fit">
         <article>
           <h3 className="font-semibold">{currentCourseData.title}</h3>
           <h4>{currentCourseData.description}</h4>
         </article>
-        <article className="grid">
+        <article className="grid items-center text-xl pr-2">
           <div className="flex gap-4">
             <span>{currentDate}</span>
             <span>{currentTime}</span>
@@ -53,20 +54,20 @@ function CourseDataPanel() {
       </header>
 
       {/* Main */}
-      <section className="grid grid-cols-mb mt-6 gap-6">
+      <section className="grid lg:grid-cols-mb mt-6 gap-6">
         {/* Course overview */}
         <section className="grid bg-neo-alt rounded-xl font-medium">
           <CourseDataOverview />
         </section>
         {/* Other Sections */}
-        <section className="grid grid-rows-f21 gap-6">
-          <section className="grid grid-cols-2 gap-6">
+        <section className="grid lg:grid-rows-f21 gap-6">
+          <section className="grid lg:grid-cols-2 gap-6">
             {/* News feed */}
             <NewsfeedContainer />
             {/* User Overview */}
             <CourseUserOverview />
           </section>
-          <section className="grid bg-neo-alt rounded-xl">b</section>
+          <CourseOverviewLeaderboard />
         </section>
       </section>
     </section>

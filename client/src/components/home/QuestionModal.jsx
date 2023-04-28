@@ -4,14 +4,14 @@ import { FaQuestionCircle } from 'react-icons/fa';
 
 function QuestionModal() {
   return (
-    <section className='absolute no__highlights grid right-4 top-4 group'>
+    <section className='absolute bg-neo p-4 rounded-2xl no__highlights grid right-4 top-4 group'>
       <div className='flex justify-end items-center'>
         <span className='mx-2'>
           <p>INFO</p>
         </span>
         <FaQuestionCircle size={40} className='cursor-pointer' />
       </div>
-      <article className='hidden m-2 bg-blue-500 p-2 group-hover:block outline outline-2 outline-black dark:outline-white rounded-lg max-w-[300px]'>
+      <article className='hidden m-2 bg-neo-in p-2 group-hover:block outline outline-2 outline-black dark:outline-white rounded-lg max-w-[300px]'>
         <p class=''>
           Since the loss of Sir Stephen Hawking, we ask ourselves. Who is the
           worlds smartest Person? Intelligence, testing methods, social opinion
