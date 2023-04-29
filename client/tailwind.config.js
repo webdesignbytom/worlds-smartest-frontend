@@ -9,6 +9,7 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         monts: ["Montserrat", "sans-serif"],
+        anton: ["Anton", "sans-serif"],
       },
       borderWidth: {
         3: "3px",

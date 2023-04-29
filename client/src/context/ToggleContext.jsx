@@ -37,6 +37,7 @@ const ToggleContextProvider = ({ children }) => {
         toggleInfoDisplay,
         toggleBetaTestDisplay,
         toggleBugReportDisplay,
+        toggleNavigation,
       }}
     >
       {children}

@@ -21,9 +21,9 @@ function HomePage() {
             <section className="grid h-full">
               <div className="grid rounded-xl">
                 <section className="mb-4 grid h-full px-2">
-                  <section className='mt-6'>
+                  <section className='mt-24 md:mt-6'>
                     <article className="text-center">
-                      <h1 className="text-6xl uppercase mb-4 font-bold">
+                      <h1 className="text-6xl uppercase mb-4 tracking-wide font-anton font-bold">
                         The World's Smartest
                       </h1>
                       <h2 className="text-3xl font-semibold">

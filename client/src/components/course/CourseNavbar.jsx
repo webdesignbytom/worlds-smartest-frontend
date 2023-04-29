@@ -21,7 +21,7 @@ function CourseNavbar() {
           <div className="grid justify-center my-6">
             <img
               className="rounded-full w-52 h-52 bg-neo-alt"
-              // src={DefaultProfileImage}
+              src={DefaultProfileImage}
               alt="user profile avatar"
             />
           </div>
