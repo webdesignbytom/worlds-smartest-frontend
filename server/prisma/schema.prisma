@@ -96,23 +96,24 @@ model ExamMeta {
 }
 
 model ExamQuestion {
-  id        Int          @id @default(autoincrement())
-  type      String       @default("") @db.VarChar(30)
-  category  String
-  active    Boolean      @default(true)
-  score     Int          @default(1)
-  question  String       @default("") @db.VarChar(5000)
-  answers   ExamAnswer[]
-  examId    Int
-  exam      Exam         @relation(fields: [examId], references: [id], onDelete: Cascade)
-  createdAt DateTime     @default(now())
-  updatedAt DateTime?    @updatedAt
+  id           Int          @id @default(autoincrement())
+  type         String       @default("") @db.VarChar(30)
+  questionType QuestionType
+  category     String
+  active       Boolean      @default(true)
+  score        Int          @default(1)
+  question     String       @default("") @db.VarChar(5000)
+  answers      ExamAnswer[]
+  examId       Int
+  exam         Exam         @relation(fields: [examId], references: [id], onDelete: Cascade)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime?    @updatedAt
 }
 
-enum AnswerType {
+enum QuestionType {
   MULTIPLECHOICE
   USERINPUT
-  SPEED 
+  SPEED
   REACTION
   RIDDLE
   HOWTO
