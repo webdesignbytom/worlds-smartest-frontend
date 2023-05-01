@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "QuestionType" AS ENUM ('MULTIPLECHOICE', 'USERINPUT', 'SPEED', 'REACTION', 'RIDDLE', 'HOWTO', 'PUZZLE', 'BESTANSWER');
+
+-- AlterTable
+ALTER TABLE "ExamQuestion" ADD COLUMN     "questionType" "QuestionType" NOT NULL DEFAULT 'MULTIPLECHOICE';
