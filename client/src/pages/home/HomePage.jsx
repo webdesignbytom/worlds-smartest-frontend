@@ -8,9 +8,9 @@ import Navbar from "../../components/nav/Navbar";
 
 function HomePage() {
   return (
-    <div className="bg-main-colour font-poppins grid grid-rows-reg min-h-screen lg:max-h-screen lg:overflow-hidden text-gray-100">
+    <div className="bg-main-colour font-poppins grid grid-rows-reg min-h-screen text-gray-100">
       <Navbar />
-      <div className="grid p-3 md:px-6">
+      <div className="grid px-2 mt-3 md:mt-0 md:px-6">
         <section className="bg-neo rounded-xl">
           <main className="relative grid grid-rows-rev h-full">
             {/* Question mark */}
@@ -23,7 +23,7 @@ function HomePage() {
                 <section className="mb-4 grid h-full px-2">
                   <section className='mt-24 md:mt-6'>
                     <article className="text-center">
-                      <h1 className="text-6xl uppercase mb-4 tracking-wide font-anton font-bold">
+                      <h1 className="text-5xl md:text-6xl uppercase mb-4 tracking-wide font-anton font-bold">
                         The World's Smartest
                       </h1>
                       <h2 className="text-3xl font-semibold">
@@ -100,7 +100,7 @@ function HomePage() {
           </main>
         </section>
 
-        <section className="md:hidden mt-6 mb-20 grid">
+        <section className="md:hidden mt-6 px-4 mb-20 grid">
           <Link to="/beta-test-questions">
             <article className="p-4 text-center text-xl bg-neo-alt rounded-xl active:scale-110 ease-in-out duration-200">
               <button>PLAY NOW!</button>

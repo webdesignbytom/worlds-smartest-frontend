@@ -16,7 +16,8 @@ function QuestionModal() {
         <span className="mx-2">
           <p>INFO</p>
         </span>
-        <FaQuestionCircle size={40} className="cursor-pointer" />
+        <FaQuestionCircle size={40} className="hidden md:grid cursor-pointer" />
+        <FaQuestionCircle size={30} className="md:hidden cursor-pointer" />
       </div>
       {toggleInfoDisplay && (
         <article className="mt-10 m-2 bg-neo-in p-2 outline outline-2 outline-black dark:outline-white rounded-lg max-w-[300px]">

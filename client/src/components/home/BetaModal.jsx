@@ -12,7 +12,8 @@ function BetaModal() {
       className="absolute bg-neo p-1 md:p-4 rounded-2xl no__highlights grid left-4 top-4"
     >
       <div className="flex justify-start items-center">
-        <TbBeta size={40} className="cursor-pointer" />
+        <TbBeta size={40} className="cursor-pointer hidden md:grid" />
+        <TbBeta size={30} className="cursor-pointer md:hidden" />
         <span className="pr-1">
           <p>BETA TEST</p>
         </span>
