@@ -27,7 +27,7 @@ function Navbar() {
             onClick={() => {
               toggleNavbar();
             }}
-            className='md:hidden no__highlights'
+            className='md:hidden no__highlights pr-2'
           >
             <span className='cursor-pointer text-white hover:text-hover-grey'>
               <svg
@@ -114,38 +114,38 @@ function Navbar() {
       {toggleNavigation && (
         <section className='w-full absolute z-30 top-[98px] px-4'>
           <nav className='bg-neo rounded-xl grid'>
-            <ul className='py-4'>
-              <li className='p-2 text-center'>
+            <ul className='py-4 text-xl'>
+              <li className='px-2 py-4 text-center'>
                 <Link onClick={toggleNavbar} to='/'>
                   <span>Home</span>
                 </Link>
               </li>
-              <li className='p-2 text-center'>
+              <li className='px-2 py-4 text-center'>
                 <Link onClick={toggleNavbar} to='/course'>
                   <span>Course</span>
                 </Link>
               </li>
-              <li className='p-2 text-center'>
+              <li className='px-2 py-4 text-center'>
                 <Link onClick={toggleNavbar} to='/quiz-information'>
                   <span>Info</span>
                 </Link>
               </li>
-              <li className='p-2 text-center'>
+              <li className='px-2 py-4 text-center'>
                 <Link onClick={toggleNavbar} to='/beta-test-questions'>
                   <span>Beta Mode</span>
                 </Link>
               </li>
-              <li className='p-2 text-center'>
+              <li className='px-2 py-4 text-center'>
                 <Link onClick={toggleNavbar} to='/account'>
                   <span>Account</span>
                 </Link>
               </li>
-              <li className='p-2 text-center'>
-                <Link onClick={toggleNavbar} to='sign-up'>
+              <li className='px-2 py-4 text-center'>
+                <Link onClick={toggleNavbar} to='/sign-up'>
                   <span>Sign Up</span>
                 </Link>
               </li>
-              <li className='p-2 text-center'>
+              <li className='px-2 py-4 text-center'>
                 <Link onClick={toggleNavbar} to='/login'>
                   <span>Login</span>
                 </Link>

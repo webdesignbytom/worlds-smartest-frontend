@@ -21,7 +21,7 @@ function QuestionModal() {
       </div>
       {toggleInfoDisplay && (
         <article className="mt-10 m-2 bg-neo-in p-2 outline outline-2 outline-black dark:outline-white rounded-lg max-w-[300px]">
-          <p class="">
+          <p>
             Since the loss of Sir Stephen Hawking, we ask ourselves. Who is the
             worlds smartest Person? Intelligence, testing methods, social
             opinion and data science have lead vastly forwards in the time since

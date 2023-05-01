@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 // Components
 import BugReport from '../../components/reports/BugReport';
-import MonitorDisplay from '../../components/examDisplay/MonitorDisplay';
+import ExamGameDisplay from '../../components/examDisplay/ExamGameDisplay';
+import ExamWelcomeScreen from '../../components/examDisplay/ExamWelcomeScreen';
 // Icons
 import { AiFillHome } from 'react-icons/ai';
+import { ExamContext } from '../../context/ExamContext';
 
 function BetaTestQuestions() {
+  const { loadNextQuestion, startExam, examUserData, examTimer } = useContext(ExamContext);
+
   const [questionsList, setQuestionsList] = useState([]);
   const [currentQuestionNum, setCurrentQuestionNum] = useState(0);
   const [totalQuestionsNum, setTotalQuestionsNum] = useState(0);
   const [currentExamNum, setCurrentExamNum] = useState(0);
-
-  const loadNextQuestion = () => {
-    console.log('loading next question');
-  };
 
   const writeBugReport = () => {
     console.log('bug');
@@ -22,11 +22,6 @@ function BetaTestQuestions() {
 
   const answerQuestion = () => {
     console.log('answer');
-  };
-
-  const startExam = () => {
-    console.log('Starting exam');
-    // Start clock
   };
 
   return (
@@ -54,23 +49,35 @@ function BetaTestQuestions() {
                 </article>
                 <article className='flex justify-evenly items-centerd md:mt-10 p-2 rounded'>
                   <h2>Exam {currentExamNum}</h2>
-                  <span className='font-semibold text-xl'>00:00</span>
+                  <span className='font-semibold text-xl'>{examTimer}</span>
                   <h3>
                     {currentQuestionNum}/{totalQuestionsNum}
                   </h3>
                 </article>
               </section>
             </div>
+
             <section className='grid w-full items-center px-6 py-6'>
-              <MonitorDisplay answerQuestion={answerQuestion} />
+            {!examUserData.startedExam ? (<ExamWelcomeScreen />) : ( <ExamGameDisplay answerQuestion={answerQuestion} />)}
             </section>
+
+            {/* start */}
             <article className='flex py-2 justify-center px-6'>
-              <button
-                onClick={loadNextQuestion}
+              {!examUserData.startedExam ? (
+                <button
+                onClick={startExam}
                 className='bg-neo-alt w-full rounded p-4  hover:bg-gray-300'
-              >
-                Start Exam
-              </button>
+                >
+                  Start Exam
+                </button>
+              ) : (
+                <button
+                onClick={loadNextQuestion}
+                  className='bg-neo-alt w-full rounded p-4  hover:bg-gray-300'
+                >
+                  Next Question
+                </button>
+              )}
             </article>
           </section>
         </section>

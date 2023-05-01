@@ -109,6 +109,17 @@ model ExamQuestion {
   updatedAt DateTime?    @updatedAt
 }
 
+enum AnswerType {
+  MULTIPLECHOICE
+  USERINPUT
+  SPEED 
+  REACTION
+  RIDDLE
+  HOWTO
+  PUZZLE
+  BESTANSWER
+}
+
 model ExamAnswer {
   id         Int          @id @default(autoincrement())
   active     Boolean      @default(true) // Is the question visible to users

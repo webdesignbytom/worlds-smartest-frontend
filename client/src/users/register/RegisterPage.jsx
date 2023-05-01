@@ -20,13 +20,14 @@ function RegisterPage() {
                   </h2>
                 </div>
                 <div className="px-4 py-2">
-                  <p className="leading-5">
+                  <p className="text-sm leading-5">
                     We collect quite a bit of information. We need this because
                     part of our test is to also collect social science data on
                     area of geographical areas of intelligence, beliefs in what
                     makes intelligence and other interesting data. However rest
                     assured your privacy will be protected.
                   </p>
+                  <div className='pt-2 '>
                   <p>
                     Already A member?{" "}
                     <Link
@@ -47,6 +48,7 @@ function RegisterPage() {
                     </Link>{" "}
                     for our data privacy policy
                   </p>
+                  </div>
                 </div>
               </article>
             </section>

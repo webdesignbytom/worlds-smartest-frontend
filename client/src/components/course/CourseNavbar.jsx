@@ -37,8 +37,8 @@ function CourseNavbar() {
               onClick={openCourseDataComponent}
               className={
                 activeNav === 'currentCourse'
-                  ? 'bg-neo-in grid items-center justify-center p-2 w-full'
-                  : 'bg-neo-alt grid items-center justify-center p-2 w-full'
+                  ? 'bg-neo-in grid items-center justify-center p-2 w-full no__highlights'
+                  : 'bg-neo-alt grid items-center justify-center p-2 w-full no__highlights'
               }
             >
               CURRENT COURSE
@@ -50,8 +50,8 @@ function CourseNavbar() {
               onClick={openCourseDataComponent}
               className={
                 activeNav === 'values'
-                  ? 'bg-neo-in grid items-center justify-center p-2 w-full'
-                  : 'bg-neo-alt grid items-center justify-center p-2 w-full'
+                  ? 'bg-neo-in grid items-center justify-center p-2 w-full no__highlights'
+                  : 'bg-neo-alt grid items-center justify-center p-2 w-full no__highlights'
               }
             >
               VALUES
@@ -63,8 +63,8 @@ function CourseNavbar() {
               onClick={openCourseDataComponent}
               className={
                 activeNav === 'leaderboard'
-                  ? 'bg-neo-in grid items-center justify-center p-2 w-full'
-                  : 'bg-neo-alt grid items-center justify-center p-2 w-full'
+                  ? 'bg-neo-in grid items-center justify-center p-2 w-full no__highlights'
+                  : 'bg-neo-alt grid items-center justify-center p-2 w-full no__highlights'
               }
             >
               LEADERBOARD
@@ -76,8 +76,8 @@ function CourseNavbar() {
               onClick={openCourseDataComponent}
               className={
                 activeNav === 'prizes'
-                  ? 'bg-neo-in grid items-center justify-center p-2 w-full'
-                  : 'bg-neo-alt grid items-center justify-center p-2 w-full'
+                  ? 'bg-neo-in grid items-center justify-center p-2 w-full no__highlights'
+                  : 'bg-neo-alt grid items-center justify-center p-2 w-full no__highlights'
               }
             >
               PRIZES

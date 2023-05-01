@@ -20,7 +20,7 @@ function BetaModal() {
       </div>
       {toggleBetaTestDisplay && (
         <article className="m-2 bg-neo-in p-2 outline outline-2 outline-black dark:outline-white rounded-lg max-w-[300px]">
-          <p class="">
+          <p>
             We are looking for help while we develop the testing environment and
             fix any bugs we can find. If you would like to test the system by
             answering a few practice test questions. Please{" "}

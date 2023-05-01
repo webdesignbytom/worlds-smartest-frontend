@@ -10,7 +10,7 @@ function HomePage() {
   return (
     <div className="bg-main-colour font-poppins grid grid-rows-reg min-h-screen text-gray-100">
       <Navbar />
-      <div className="grid px-3 mt-3 md:mt-0 md:px-6">
+      <div className="grid px-3 mt-4 md:mt-0 md:px-6">
         <section className="bg-neo rounded-xl">
           <main className="relative grid grid-rows-rev h-full">
             {/* Question mark */}

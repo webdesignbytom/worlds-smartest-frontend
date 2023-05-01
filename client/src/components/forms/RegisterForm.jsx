@@ -311,7 +311,7 @@ function RegisterForm() {
 
         <div className='mt-2'>
           <input
-            className='bg-neo-alt rounded w-full p-2'
+            className='bg-neo-alt rounded w-full p-2 no__highlights'
             type='submit'
             value='submit'
           />
