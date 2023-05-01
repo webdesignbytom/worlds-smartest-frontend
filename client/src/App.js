@@ -16,6 +16,7 @@ import CreateExams from "./pages/admin/CreateExams";
 import CreateCourse from "./pages/admin/CreateCourse";
 import CourseOverview from './pages/course/CourseOverview';
 import AccountPage from './pages/account/AccountPage';
+import SettingsPage from './pages/settings/SettingsPage';
 
 function App() {
   ReactGA.initialize("G-2DWCKVD9WK");
@@ -43,6 +44,7 @@ function App() {
       <Route path="/sign-up" index element={<RegisterPage />} />
       <Route path="/login" index element={<LoginPage />} />
       <Route path="/account" index element={<AccountPage />} />
+      <Route path="/settings" index element={<SettingsPage />} />
 
       {/* ADMIN */}
       <Route

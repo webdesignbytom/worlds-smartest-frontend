@@ -90,6 +90,15 @@ function Navbar() {
               </li>
               <li
                 className={
+                  activeNav === '/settings' ? 'selected__link' : 'nav__link'
+                }
+              >
+                <Link to='/settings'>
+                  <span>Settings</span>
+                </Link>
+              </li>
+              <li
+                className={
                   activeNav === '/login' ? 'selected__link' : 'nav__link'
                 }
               >
@@ -138,6 +147,11 @@ function Navbar() {
               <li className='px-2 py-4 text-center'>
                 <Link onClick={toggleNavbar} to='/account'>
                   <span>Account</span>
+                </Link>
+              </li>
+              <li className='px-2 py-4 text-center'>
+                <Link onClick={toggleNavbar} to='/settings'>
+                  <span>Settings</span>
                 </Link>
               </li>
               <li className='px-2 py-4 text-center'>
