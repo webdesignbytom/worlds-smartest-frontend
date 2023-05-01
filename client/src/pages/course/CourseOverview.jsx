@@ -10,7 +10,7 @@ function CourseOverview() {
   return (
     <div className="grid bg-[#242528] text-gray-100 grid-rows-reg min-h-screen w-full">
       <Navbar />
-      <section className="grid px-6 mb-8 mt-4 w-full">
+      <section className="grid px-4 md:px-6 mb-8 mt-4 w-full">
         <div className="grid lg:grid-cols-x3 gap-8">
           {/* Side nav */}
           <CourseNavbar />

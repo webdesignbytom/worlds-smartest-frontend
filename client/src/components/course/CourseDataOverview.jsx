@@ -17,97 +17,97 @@ function CourseDataOverview() {
         <div className="grid grid-rows-rev py-4 px-4">
           <ul className="grid gap-1">
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Current Semester:</span>
                 <span>{currentCourseData.currentSemester}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Start Date:</span>
                 <span> {currentCourseData.courseStartDate}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Participants: </span>
                 <span>{currentCourseData.numUsers}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Current Day: </span>
                 <span>{currentCourseData.currentDay}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Total Days of Course:</span>
                 <span>{currentCourseData.totalDays}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Semester Start Date:</span>
                 <span>{currentCourseData.semesterStarted}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Semester End Date:</span>
                 <span>{currentCourseData.semesterEnds}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>New Users This Semester:</span>
                 <span>{currentCourseData.newUsersThisSemester}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Next Semester Start Date:</span>
                 <span>{currentCourseData.nextSemesterStarts}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Next Semester:</span>
                 <span>{currentCourseData.nextSemesterName}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Total Questions Asked:</span>
                 <span>{currentCourseData.totalQuestionsAsked}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Total Score:</span>
                 <span>{currentCourseData.totalScore}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Semester Correct Score Percentage:</span>
                 <span>{currentCourseData.semesterCorrectAnswerPercentage}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Course Correct Score Percentage:</span>
                 <span>{currentCourseData.courseCorrectAnswerPercentage}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Results Day:</span>
                 <span>{currentCourseData.courseResultsDate}</span>
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[80%] mx-auto">
+              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Course End Date:</span>
                 <span>{currentCourseData.courseEndDate}</span>
               </article>

@@ -27,6 +27,7 @@ function App() {
     console.log("nav", navigator.userAgent); // browser
     console.log("nav", navigator.language); // language
   }, []);
+  
   return (
     <Routes>
       <Route path="/" index element={<HomePage />} />

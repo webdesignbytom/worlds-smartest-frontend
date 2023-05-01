@@ -10,7 +10,8 @@ function BugReport({ writeBugReport }) {
         <span className='mx-2'>
           <p>BUG REPORT</p>
         </span>
-        <AiFillBug size={40} />
+        <AiFillBug size={40} className='hidden md:grid' />
+        <AiFillBug size={30} className='md:hidden' />
       </article>
     </section>
   );

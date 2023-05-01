@@ -10,6 +10,7 @@ const ToggleContextProvider = ({ children }) => {
   const [toggleBugReportDisplay, setToggleBugReportDisplay] = useState(false);
 
   const toggleNavbar = () => {
+    console.log('tog');
     setToggleNavigation(!toggleNavigation);
   };
 
