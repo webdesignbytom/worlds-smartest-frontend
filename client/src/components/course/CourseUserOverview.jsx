@@ -74,7 +74,7 @@ function CourseUserOverview() {
               </article>
             </li>
             <li className="bg-neo">
-              <article className='flex justify-between w-[95%] md:w-[80%] mx-auto'>
+              <article className='flex md:hidden 2xl:flex justify-between w-[95%] md:w-[80%] mx-auto'>
                 <span>Date Joined:</span>
                 <span>{userRecords.dateJoined}</span>
               </article>

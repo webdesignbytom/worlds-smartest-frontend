@@ -65,7 +65,7 @@ function CourseDataOverview() {
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
+              <article className="flex md:hidden 2xl:flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Next Semester Start Date:</span>
                 <span>{currentCourseData.nextSemesterStarts}</span>
               </article>
@@ -95,7 +95,7 @@ function CourseDataOverview() {
               </article>
             </li>
             <li className="bg-neo">
-              <article className="flex justify-between w-[95%] md:w-[80%] mx-auto">
+              <article className="flex md:hidden 2xl:flex justify-between w-[95%] md:w-[80%] mx-auto">
                 <span>Course Correct Score Percentage:</span>
                 <span>{currentCourseData.courseCorrectAnswerPercentage}</span>
               </article>

@@ -54,7 +54,7 @@ function CourseDataPanel() {
       </header>
 
       {/* Main */}
-      <section className="grid lg:grid-cols-mb mt-6 gap-6">
+      <section className="grid lg:grid-cols-mb mt-4 gap-6">
         {/* Course overview */}
         <section className="grid bg-neo-alt rounded-xl font-medium">
           <CourseDataOverview />
