@@ -8,9 +8,9 @@ import Navbar from "../../components/nav/Navbar";
 
 function HomePage() {
   return (
-    <div className="bg-main-colour font-poppins grid grid-rows-reg min-h-screen text-gray-100">
+    <div className="bg-main-colour font-poppins grid grid-rows-reg min-h-screen text-gray-100 lg:max-h-screen">
       <Navbar />
-      <div className="grid px-3 mt-4 md:mt-0 md:px-6">
+      <div className="grid px-3 mt-4 md:mt-0 md:px-6 md:mb-10">
         <section className="bg-neo rounded-xl">
           <main className="relative grid grid-rows-rev h-full">
             {/* Question mark */}
@@ -29,7 +29,7 @@ function HomePage() {
                       <h2 className="text-3xl font-semibold">
                         The world's formost intelligence test
                       </h2>
-                      <h3 className="text-2xl text-center mt-10 mb-4">
+                      <h3 className="text-2xl text-center mt-6 mb-4">
                         Starting{" "}
                         <span className="font-semibold">1st October 2023</span>{" "}
                         until{" "}
