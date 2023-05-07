@@ -81,7 +81,7 @@ function Navbar() {
                     : 'nav__link'
                 }
               >
-                <Link onClick={toggleNavbar} to='/quiz-information'>
+                <Link to='/quiz-information'>
                   <span>Info</span>
                 </Link>
               </li>

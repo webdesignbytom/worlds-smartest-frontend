@@ -41,7 +41,7 @@ function AccountNavbar() {
                   : 'bg-neo-alt grid items-center justify-center p-2 w-full no__highlights'
               }
             >
-              CURRENT COURSE
+              Course Records
             </button>
           </div>
           <div>
@@ -54,7 +54,7 @@ function AccountNavbar() {
                   : 'bg-neo-alt grid items-center justify-center p-2 w-full no__highlights'
               }
             >
-              VALUES
+              Calander
             </button>
           </div>
           <div>
@@ -67,7 +67,7 @@ function AccountNavbar() {
                   : 'bg-neo-alt grid items-center justify-center p-2 w-full no__highlights'
               }
             >
-              LEADERBOARD
+              Personal Infomation
             </button>
           </div>
           <div>
@@ -80,7 +80,7 @@ function AccountNavbar() {
                   : 'bg-neo-alt grid items-center justify-center p-2 w-full no__highlights'
               }
             >
-              PRIZES
+              Click To Start Next Exam
             </button>
           </div>
         </div>
