@@ -1,16 +1,30 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // Context
 import { ToggleContext } from '../../context/ToggleContext';
+import { UserContext } from '../../context/UserContext';
+import { sampleUserData } from '../../users/utils/utils';
 
 function Navbar() {
   const { toggleNavbar, toggleNavigation } = useContext(ToggleContext);
+  const { user, setUser } = useContext(UserContext);
 
   const [activeNav, setActiveNav] = useState('#');
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     setActiveNav(window.location.pathname);
   }, []);
+
+  const signOut = (event) => {
+    event.preventDefault();
+
+    setUser(sampleUserData);
+    localStorage.removeItem(process.env.REACT_APP_USER_TOKEN);
+
+    navigate('/', { replace: true });
+  };
 
   return (
     <>
@@ -51,6 +65,7 @@ function Navbar() {
           {/* Monitor Nav */}
           <nav className='hidden md:flex'>
             <ul className='flex gap-8 items-center'>
+              {/* Home */}
               <li
                 className={activeNav === '/' ? 'selected__link' : 'nav__link'}
               >
@@ -58,7 +73,19 @@ function Navbar() {
                   <span>Home</span>
                 </Link>
               </li>
-
+              {/* Info */}
+              <li
+                className={
+                  activeNav === '/quiz-information'
+                    ? 'selected__link'
+                    : 'nav__link'
+                }
+              >
+                <Link onClick={toggleNavbar} to='/quiz-information'>
+                  <span>Info</span>
+                </Link>
+              </li>
+              {/* Beta mode */}
               <li
                 className={
                   activeNav === '/beta-test-questions'
@@ -70,6 +97,7 @@ function Navbar() {
                   <span>Beta Mode</span>
                 </Link>
               </li>
+              {/* Course */}
               <li
                 className={
                   activeNav === '/course' ? 'selected__link' : 'nav__link'
@@ -79,15 +107,17 @@ function Navbar() {
                   <span>Course</span>
                 </Link>
               </li>
-              <li
-                className={
-                  activeNav === '/account' ? 'selected__link' : 'nav__link'
-                }
-              >
-                <Link to='/account'>
-                  <span>Account</span>
-                </Link>
-              </li>
+              {user.email && (
+                <li
+                  className={
+                    activeNav === '/account' ? 'selected__link' : 'nav__link'
+                  }
+                >
+                  <Link to='/account'>
+                    <span>Account</span>
+                  </Link>
+                </li>
+              )}
               <li
                 className={
                   activeNav === '/settings' ? 'selected__link' : 'nav__link'
@@ -97,24 +127,34 @@ function Navbar() {
                   <span>Settings</span>
                 </Link>
               </li>
-              <li
-                className={
-                  activeNav === '/login' ? 'selected__link' : 'nav__link'
-                }
-              >
-                <Link to='/login'>
-                  <span>Login</span>
-                </Link>
-              </li>
-              <li
-                className={
-                  activeNav === '/sign-up' ? 'selected__link' : 'nav__link'
-                }
-              >
-                <Link to='/sign-up'>
-                  <span>Sign Up</span>
-                </Link>
-              </li>
+              {user.email.length === 0 && (
+                <>
+                  <li
+                    className={
+                      activeNav === '/login' ? 'selected__link' : 'nav__link'
+                    }
+                  >
+                    <Link to='/login'>
+                      <span>Login</span>
+                    </Link>
+                  </li>
+                  <li
+                    className={
+                      activeNav === '/sign-up' ? 'selected__link' : 'nav__link'
+                    }
+                  >
+                    <Link to='/sign-up'>
+                      <span>Sign Up</span>
+                    </Link>
+                  </li>
+                </>
+              )}
+              {/* Sign out */}
+              {user.email && (
+                <li className='nav__link'>
+                  <Link onClick={signOut}>Sign out</Link>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
@@ -144,26 +184,38 @@ function Navbar() {
                   <span>Beta Mode</span>
                 </Link>
               </li>
-              <li className='px-2 py-4 text-center'>
-                <Link onClick={toggleNavbar} to='/account'>
-                  <span>Account</span>
-                </Link>
-              </li>
+              {user.email && (
+                <li className='px-2 py-4 text-center'>
+                  <Link onClick={toggleNavbar} to='/account'>
+                    <span>Account</span>
+                  </Link>
+                </li>
+              )}
               <li className='px-2 py-4 text-center'>
                 <Link onClick={toggleNavbar} to='/settings'>
                   <span>Settings</span>
                 </Link>
               </li>
-              <li className='px-2 py-4 text-center'>
-                <Link onClick={toggleNavbar} to='/sign-up'>
-                  <span>Sign Up</span>
-                </Link>
-              </li>
-              <li className='px-2 py-4 text-center'>
-                <Link onClick={toggleNavbar} to='/login'>
-                  <span>Login</span>
-                </Link>
-              </li>
+              {!user.email && (
+                <>
+                  <li className='px-2 py-4 text-center'>
+                    <Link onClick={toggleNavbar} to='/sign-up'>
+                      <span>Sign Up</span>
+                    </Link>
+                  </li>
+                  <li className='px-2 py-4 text-center'>
+                    <Link onClick={toggleNavbar} to='/login'>
+                      <span>Login</span>
+                    </Link>
+                  </li>
+                </>
+              )}
+              {/* Sign out */}
+              {user.email && (
+                <li className='nav__link'>
+                  <Link onClick={signOut}>Sign out</Link>
+                </li>
+              )}
             </ul>
           </nav>
         </section>
