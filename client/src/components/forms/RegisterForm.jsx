@@ -1,19 +1,38 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // Utils
-import CountrySelect from '../../users/utils/CountrySelect';
 import { registerDataTemplate } from '../../users/utils/utils';
+import client from '../../utils/axios/client';
 
 function RegisterForm() {
-  const [registerData, setRegisterData] = useState(registerDataTemplate);
-  const handleChange = (event) => {};
+  const [registerFormData, setRegisterFormData] = useState(registerDataTemplate);
 
-  const handleRegister = (event) => {
+  const handleSubmitRegisterForm = (event) => {
     event.preventDefault();
-    console.log('register');
+    console.log('zxx');
+
+    client
+      .post('/users/register', registerFormData, false)
+      .then((res) => {
+        console.log('res', res.data);
+      })
+
+      .catch((err) => {
+        console.error('Unable to register new user', err);
+      });
   };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setRegisterFormData({
+      ...registerFormData,
+      [name]: value,
+    });
+  };
+
   return (
-    <form onSubmit={handleRegister} className=''>
+    <form onSubmit={handleSubmitRegisterForm} className=''>
       <section className='grid gap-2'>
         {/* Title */}
         <div className='w-full grid grid-flow-col justify-between'>
