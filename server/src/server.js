@@ -9,6 +9,7 @@ import * as url from 'url';
 // Import routers
 
 import userRouter from './routes/users.js';
+import authRouter from './routes/auth.js';
 import courseRouter from './routes/courses.js';
 import examRouter from './routes/exams.js';
 import semesterRouter from './routes/semesters.js';
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 // Routes
+app.use('/', authRouter);
 app.use('/users', userRouter);
 app.use('/courses', courseRouter);
 app.use('/exams', examRouter);
