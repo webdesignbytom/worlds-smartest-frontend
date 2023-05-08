@@ -13,7 +13,7 @@ import {
   ServerErrorEvent,
   MissingFieldEvent,
 } from '../event/utils/errorUtils.js';
-import { createExam, findAllExams } from '../domain/exams.js';
+import { createExam, findAllExams, findExamById } from '../domain/exams.js';
 
 export const getAllExams = async (req, res) => {
   console.log('Get all exams');
@@ -41,6 +41,43 @@ export const getAllExams = async (req, res) => {
   } catch (err) {
     //
     const serverError = new ServerErrorEvent(req.user, `Get all exams`);
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};
+
+export const getExamById = async (req, res) => {
+  console.log('Get exam bt id');
+  let { examId } = req.body
+  console.log('dd', typeof examId);
+  
+  console.log('examId: ' + examId);
+  
+  try {
+    // Find all exams
+    const foundExam = await findExamById(examId);
+    console.log('found foundExam', foundExam);
+
+    // If no found complaints
+    if (!foundExam) {
+      // Create error instance
+      const notFound = new NotFoundEvent(
+        null,
+        'Exam not found',
+        'Exam Database'
+      );
+      myEmitterErrors.emit('error', notFound);
+      // Send response
+      return sendMessageResponse(res, notFound.code, notFound.message);
+    }
+
+    // myEmitterComplaints.emit('get-current-course', req.user);
+    return sendDataResponse(res, 200, { exam: foundExam });
+    //
+  } catch (err) {
+    //
+    const serverError = new ServerErrorEvent(req.user, `Get exam by id`);
     myEmitterErrors.emit('error', serverError);
     sendMessageResponse(res, serverError.code, serverError.message);
     throw err;

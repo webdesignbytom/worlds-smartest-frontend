@@ -2,6 +2,20 @@ import dbClient from '../utils/dbClient.js';
 
 export const findAllExams = () => dbClient.exam.findMany({});
 
+export const findExamById = (examId) => dbClient.exam.findFirst({
+  where: {
+    id: examId,
+  },
+  include: {
+    metaData: true,
+    questions: {
+      include: {
+        answers: true
+      }
+    },
+  }
+});
+
 export const createExam = (
   title,
   metaTitle,

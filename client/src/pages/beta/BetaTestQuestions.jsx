@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // Components
 import BugReport from '../../components/reports/BugReport';
@@ -7,14 +7,18 @@ import ExamWelcomeScreen from '../../components/examDisplay/ExamWelcomeScreen';
 // Icons
 import { AiFillHome } from 'react-icons/ai';
 import { ExamContext } from '../../context/ExamContext';
+import client from '../../utils/axios/client';
 
 function BetaTestQuestions() {
-  const { loadNextQuestion, startExam, examUserData, examTimer } = useContext(ExamContext);
+  const { loadNextQuestion, startExam, examUserData, examTimer } =
+    useContext(ExamContext);
 
   const [questionsList, setQuestionsList] = useState([]);
   const [currentQuestionNum, setCurrentQuestionNum] = useState(0);
   const [totalQuestionsNum, setTotalQuestionsNum] = useState(0);
   const [currentExamNum, setCurrentExamNum] = useState(0);
+  const [currentExam, setCurrentExam] = useState(0);
+  const [getExamNum, setGetExamNum] = useState(1);
 
   const writeBugReport = () => {
     console.log('bug');
@@ -23,6 +27,20 @@ function BetaTestQuestions() {
   const answerQuestion = () => {
     console.log('answer');
   };
+
+  console.log('currentExam', currentExam);
+
+  useEffect(() => {
+    client
+      .get('/exams/exam-id', getExamNum, false)
+      .then((res) => {
+        console.log('res', res.data);
+        setCurrentExam(res.data.data.exam)
+      })
+      .catch((err) => {
+        console.error('Unable to get exam', err);
+      });
+  }, []);
 
   return (
     <div className='relative grid test__bg min-h-screen h-screen lg:overflow-hidden w-full p-2 text-gray-100'>
@@ -58,21 +76,25 @@ function BetaTestQuestions() {
             </div>
 
             <section className='grid w-full items-center px-6 py-6'>
-            {!examUserData.startedExam ? (<ExamWelcomeScreen />) : ( <ExamGameDisplay answerQuestion={answerQuestion} />)}
+              {!examUserData.startedExam ? (
+                <ExamWelcomeScreen />
+              ) : (
+                <ExamGameDisplay answerQuestion={answerQuestion} />
+              )}
             </section>
 
             {/* start */}
             <article className='flex py-2 justify-center px-6'>
               {!examUserData.startedExam ? (
                 <button
-                onClick={startExam}
-                className='bg-neo-alt w-full rounded p-4  hover:bg-gray-300'
+                  onClick={startExam}
+                  className='bg-neo-alt w-full rounded p-4  hover:bg-gray-300'
                 >
                   Start Exam
                 </button>
               ) : (
                 <button
-                onClick={loadNextQuestion}
+                  onClick={loadNextQuestion}
                   className='bg-neo-alt w-full rounded p-4  hover:bg-gray-300'
                 >
                   Next Question
