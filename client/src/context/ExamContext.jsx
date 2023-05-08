@@ -14,16 +14,16 @@ const ExamContextProvider = ({ children }) => {
   });
   const [examTimer, setExamTimer] = useState(0);
 
-  useEffect(() => {
-    if (examUserData.startedExam) {
-      const interval = setInterval(() => {
-        setExamTimer((prev) => prev + 1);
-        console.log('exam', examUserData);
-      }, 1000);
+  // useEffect(() => {
+  //   if (examUserData.startedExam) {
+  //     const interval = setInterval(() => {
+  //       setExamTimer((prev) => prev + 1);
+  //       console.log('exam', examUserData);
+  //     }, 1000);
 
-      return () => clearInterval(interval);
-    }
-  }, [examUserData]);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [examUserData]);
 
   const loadNextQuestion = () => {
     console.log('loading next question');

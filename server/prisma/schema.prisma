@@ -96,19 +96,26 @@ model ExamMeta {
 }
 
 enum QuestionType {
-  MULTIPLECHOICE
-  USERINPUT
   SPEED
   REACTION
   RIDDLE
   HOWTO
   PUZZLE
   BESTANSWER
+  GENERALKNOWLEDGE
 }
+
+enum AnswerType {
+  MULTIPLECHOICE
+  TEXTINPUT
+  AUDIOINPUT
+}
+
 model ExamQuestion {
   id           Int          @id @default(autoincrement())
   type         String       @default("") @db.VarChar(30)
-  questionType QuestionType @default(MULTIPLECHOICE)
+  questionType QuestionType @default(GENERALKNOWLEDGE)
+  answerType   AnswerType   @default(MULTIPLECHOICE)
   category     String
   active       Boolean      @default(true)
   score        Int          @default(1)
@@ -119,8 +126,6 @@ model ExamQuestion {
   createdAt    DateTime     @default(now())
   updatedAt    DateTime?    @updatedAt
 }
-
-
 
 model ExamAnswer {
   id         Int          @id @default(autoincrement())

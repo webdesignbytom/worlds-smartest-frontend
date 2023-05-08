@@ -17,7 +17,7 @@ function BetaTestQuestions() {
   const [currentQuestionNum, setCurrentQuestionNum] = useState(0);
   const [totalQuestionsNum, setTotalQuestionsNum] = useState(0);
   const [currentExamNum, setCurrentExamNum] = useState(0);
-  const [currentExam, setCurrentExam] = useState(0);
+  const [currentExam, setCurrentExam] = useState({});
   const [getExamNum, setGetExamNum] = useState(1);
 
   const writeBugReport = () => {
@@ -29,13 +29,14 @@ function BetaTestQuestions() {
   };
 
   console.log('currentExam', currentExam);
-
+  console.log('questionsList', questionsList);
   useEffect(() => {
     client
       .get('/exams/exam-id', getExamNum, false)
       .then((res) => {
         console.log('res', res.data);
-        setCurrentExam(res.data.data.exam)
+        setCurrentExam(res.data.data.exam);
+        setQuestionsList(res.data.data.exam.questions);
       })
       .catch((err) => {
         console.error('Unable to get exam', err);
@@ -79,7 +80,7 @@ function BetaTestQuestions() {
               {!examUserData.startedExam ? (
                 <ExamWelcomeScreen />
               ) : (
-                <ExamGameDisplay answerQuestion={answerQuestion} />
+                <ExamGameDisplay currentExamNum={currentExamNum} questionsList={questionsList} answerQuestion={answerQuestion} />
               )}
             </section>
 

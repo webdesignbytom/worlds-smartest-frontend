@@ -76,7 +76,7 @@ async function seed() {
 
   const questionOneExamOne = await dbClient.examQuestion.create({
     data: {
-      questionType: 'MULTIPLECHOICE',
+      questionType: 'GENERALKNOWLEDGE',
       type: 'General Knowledge',
       category: 'Space',
       question: 'What is the closest planet to the Sun?',
@@ -86,7 +86,7 @@ async function seed() {
 
   const questionTwoExamOne = await dbClient.examQuestion.create({
     data: {
-      questionType: 'MULTIPLECHOICE',
+      questionType: 'GENERALKNOWLEDGE',
       type: 'General Knowledge',
       category: 'Sport',
       question: 'What sport did Cassius Clay play?',
@@ -97,7 +97,7 @@ async function seed() {
   const questionThreeExamOne = await dbClient.examQuestion.create({
     data: {
       type: 'Puzzle',
-      questionType: 'USERINPUT',
+      questionType: 'RIDDLE',
       category: 'Puzzle',
       question: 'Where is the closest place you can rest a hat?',
       examId: examOne.id,
